@@ -6,9 +6,9 @@ position: Consumer
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Payments
   - Billing
   - Collections
+  - Payments
 created: '2025-02-24'
 modified: '2026-03-16'
 url: >-
@@ -20,9 +20,9 @@ apis:
     description: Streamline customer journeys and accelerate transactions with Tratta's payment and billing platform.
     humanURL: https://www.tratta.io/
     tags:
-      - Payments
       - Billing
       - Collections
+      - Payments
     properties:
       - type: Documentation
         url: https://www.tratta.io/
