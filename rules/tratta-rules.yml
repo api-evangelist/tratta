@@ -1,0 +1,105 @@
+extends: spectral:oas
+rules:
+  tratta-operation-summary-title-case:
+    description: All operation summaries must use Title Case
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z]*(\\s[A-Z][a-zA-Z]*)*$"
+
+  tratta-operationid-required:
+    description: All operations must have an operationId
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  tratta-operationid-verb-noun:
+    description: OperationIds should start with a verb (list, get, create, update, delete)
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(list|get|create|update|delete|bulk|report|search)[A-Z].*$"
+
+  tratta-tags-required:
+    description: All operations must have tags
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  tratta-bearer-auth-required:
+    description: API must use bearer authentication
+    severity: error
+    given: "$.components.securitySchemes[*]"
+    then:
+      field: type
+      function: enumeration
+      functionOptions:
+        values:
+          - http
+          - oauth2
+
+  tratta-org-uuid-in-server:
+    description: Server URL must include organization UUID variable
+    severity: warn
+    given: "$.servers[*].url"
+    then:
+      function: pattern
+      functionOptions:
+        match: ".*\\{org-uuid\\}.*"
+
+  tratta-response-201-for-post:
+    description: POST operations should return 201 Created
+    severity: warn
+    given: "$.paths[*].post.responses"
+    then:
+      field: "201"
+      function: truthy
+
+  tratta-response-200-for-get:
+    description: GET operations must return 200 OK
+    severity: error
+    given: "$.paths[*].get.responses"
+    then:
+      field: "200"
+      function: truthy
+
+  tratta-pagination-params:
+    description: List endpoints should support limit and page parameters
+    severity: warn
+    given: "$.paths[*].get"
+    then:
+      field: parameters
+      function: truthy
+
+  tratta-data-wrapper:
+    description: Responses should wrap data in a data property
+    severity: warn
+    given: "$.components.schemas[?(@property.match(/Response$/))].properties"
+    then:
+      field: data
+      function: truthy
+
+  tratta-request-body-json:
+    description: POST and PUT request bodies should use application/json
+    severity: error
+    given: "$.paths[*][post,put].requestBody.content"
+    then:
+      field: "application/json"
+      function: truthy
+
+  tratta-snake-case-parameters:
+    description: Query parameter names should use snake_case
+    severity: warn
+    given: "$.paths[*][*].parameters[*][?(@.in=='query')].name"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]*$"

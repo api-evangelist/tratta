@@ -1,0 +1,25 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://abc123.production.tratta.io/api/v1/customer_sessions",
+    "headers": {
+      "Authorization": "Bearer YOUR_BEARER_TOKEN",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "customer_id": "cust_1a2b3c4d5e6f",
+      "redirect_url": "https://example.com/payment-complete",
+      "expires_in": 3600
+    }
+  },
+  "response": {
+    "status": 201,
+    "body": {
+      "data": {
+        "id": "session_x9y8z7w6v5u4",
+        "magic_link": "https://portal.tratta.io/session/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        "expires_at": "2026-05-03T11:00:00Z"
+      }
+    }
+  }
+}

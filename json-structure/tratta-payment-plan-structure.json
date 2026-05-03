@@ -1,0 +1,16 @@
+{
+  "name": "Tratta Payment Plan",
+  "description": "Structure of a payment plan in the Tratta debt collection platform",
+  "fields": [
+    {"name": "id", "type": "string", "required": true, "description": "Payment plan identifier"},
+    {"name": "debt_account_id", "type": "string", "required": true, "description": "Associated debt account ID"},
+    {"name": "total_amount", "type": "number", "required": true, "description": "Total plan amount"},
+    {"name": "installment_amount", "type": "number", "required": true, "description": "Per-installment amount"},
+    {"name": "frequency", "type": "enum(weekly|biweekly|monthly)", "required": true, "description": "Payment frequency"},
+    {"name": "status", "type": "enum(active|paused|completed|cancelled)", "required": true, "description": "Plan status"},
+    {"name": "payment_source", "type": "string", "required": false, "description": "Payment initiation source"},
+    {"name": "start_date", "type": "date", "required": false, "description": "Plan start date"},
+    {"name": "next_payment_date", "type": "date", "required": false, "description": "Next payment date"},
+    {"name": "created_at", "type": "datetime", "required": true, "description": "Creation timestamp"}
+  ]
+}

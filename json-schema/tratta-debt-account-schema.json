@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tratta.io/schemas/debt-account",
+  "title": "Tratta Debt Account",
+  "description": "A debt account in the Tratta collections platform",
+  "type": "object",
+  "required": ["id", "customer_id", "original_balance", "current_balance", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique debt account identifier"
+    },
+    "customer_id": {
+      "type": "string",
+      "description": "ID of the associated customer"
+    },
+    "account_number": {
+      "type": "string",
+      "description": "External account number from the system of record"
+    },
+    "original_balance": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Original amount owed when the account was created"
+    },
+    "current_balance": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Current outstanding balance"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "resolved", "closed"],
+      "description": "Current status of the debt account"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of the debt"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the debt account was created"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://tratta.io/schemas/payment-plan",
+  "title": "Tratta Payment Plan",
+  "description": "A structured payment plan for a debt account in the Tratta platform",
+  "type": "object",
+  "required": ["id", "debt_account_id", "total_amount", "installment_amount", "frequency", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique payment plan identifier"
+    },
+    "debt_account_id": {
+      "type": "string",
+      "description": "ID of the associated debt account"
+    },
+    "total_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Total amount to be paid under the plan"
+    },
+    "installment_amount": {
+      "type": "number",
+      "minimum": 0,
+      "description": "Amount of each installment payment"
+    },
+    "frequency": {
+      "type": "string",
+      "enum": ["weekly", "biweekly", "monthly"],
+      "description": "Payment frequency"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "paused", "completed", "cancelled"],
+      "description": "Current status of the payment plan"
+    },
+    "payment_source": {
+      "type": "string",
+      "description": "How the payment was initiated (api, portal, ivr, agent)"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Payment plan start date"
+    },
+    "next_payment_date": {
+      "type": ["string", "null"],
+      "format": "date",
+      "description": "Date of the next scheduled payment"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the payment plan was created"
+    }
+  }
+}

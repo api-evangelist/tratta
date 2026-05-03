@@ -1,0 +1,1143 @@
+openapi: 3.0.3
+info:
+  title: Tratta API
+  description: >-
+    The Tratta REST API enables programmatic integration with Tratta's debt
+    collection and payment experience platform. Manage debt accounts, payment
+    plans, transactions, customers, charges, and webhooks for collections
+    workflows. Supports both sandbox and production environments.
+  version: v1.0.0
+  contact:
+    name: Tratta Support
+    url: https://docs.tratta.io/
+  x-logo:
+    url: https://www.tratta.io/logo.png
+servers:
+  - url: https://{org-uuid}.production.tratta.io/api/v1
+    description: Tratta Production Server
+    variables:
+      org-uuid:
+        description: Your organization UUID provided by Tratta
+        default: your-org-uuid
+  - url: https://{org-uuid}.sandbox.tratta.io/api/v1
+    description: Tratta Sandbox Server
+    variables:
+      org-uuid:
+        description: Your organization UUID provided by Tratta
+        default: your-org-uuid
+security:
+  - BearerAuth: []
+tags:
+  - name: Customers
+    description: Customer account management
+  - name: Debt Accounts
+    description: Debt account operations and management
+  - name: Payment Plans
+    description: Payment plan creation and management
+  - name: Payment Methods
+    description: Payment method storage and management
+  - name: Charges
+    description: Charge processing and management
+  - name: Transactions
+    description: Transaction history and reporting
+  - name: Blocks
+    description: Account block management
+  - name: Tickets
+    description: Support ticket management
+  - name: Webhooks
+    description: Webhook configuration for event notifications
+  - name: Customer Sessions
+    description: Secure customer session management
+  - name: Bulk Operations
+    description: Bulk import and export operations
+paths:
+  /customers:
+    get:
+      operationId: listCustomers
+      summary: List Customers
+      description: Returns a paginated list of customers in the organization.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response with customer list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createCustomer
+      summary: Create Customer
+      description: Creates a new customer record.
+      tags:
+        - Customers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '201':
+          description: Customer created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /customers/{id}:
+    get:
+      operationId: getCustomer
+      summary: Get Customer
+      description: Returns a single customer by ID.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateCustomer
+      summary: Update Customer
+      description: Updates an existing customer record.
+      tags:
+        - Customers
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'
+      responses:
+        '200':
+          description: Customer updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /debt_accounts:
+    get:
+      operationId: listDebtAccounts
+      summary: List Debt Accounts
+      description: Returns a paginated list of debt accounts.
+      tags:
+        - Debt Accounts
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response with debt account list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebtAccountListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createDebtAccount
+      summary: Create Debt Account
+      description: Creates a new debt account for a customer.
+      tags:
+        - Debt Accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebtAccountRequest'
+      responses:
+        '201':
+          description: Debt account created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebtAccountResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /debt_accounts/{id}:
+    get:
+      operationId: getDebtAccount
+      summary: Get Debt Account
+      description: Returns a single debt account by ID.
+      tags:
+        - Debt Accounts
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DebtAccountResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /payment_plans:
+    get:
+      operationId: listPaymentPlans
+      summary: List Payment Plans
+      description: Returns a paginated list of payment plans.
+      tags:
+        - Payment Plans
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response with payment plan list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanListResponse'
+    post:
+      operationId: createPaymentPlan
+      summary: Create Payment Plan
+      description: Creates a new payment plan for a debt account.
+      tags:
+        - Payment Plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPlanRequest'
+      responses:
+        '201':
+          description: Payment plan created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /payment_plans/{id}:
+    get:
+      operationId: getPaymentPlan
+      summary: Get Payment Plan
+      description: Returns a single payment plan by ID.
+      tags:
+        - Payment Plans
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updatePaymentPlan
+      summary: Update Payment Plan
+      description: Updates an existing payment plan.
+      tags:
+        - Payment Plans
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPlanRequest'
+      responses:
+        '200':
+          description: Payment plan updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanResponse'
+  /payment_methods:
+    get:
+      operationId: listPaymentMethods
+      summary: List Payment Methods
+      description: Returns a list of stored payment methods.
+      tags:
+        - Payment Methods
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/PageParam'
+      responses:
+        '200':
+          description: Successful response with payment method list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodListResponse'
+    post:
+      operationId: createPaymentMethod
+      summary: Create Payment Method
+      description: >-
+        Creates a standalone payment method that can be used for future charges.
+        Supports card and bank account payment types.
+      tags:
+        - Payment Methods
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodRequest'
+      responses:
+        '201':
+          description: Payment method created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /payment_methods/{id}:
+    get:
+      operationId: getPaymentMethod
+      summary: Get Payment Method
+      description: Returns a single payment method by ID.
+      tags:
+        - Payment Methods
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePaymentMethod
+      summary: Delete Payment Method
+      description: Deletes a stored payment method.
+      tags:
+        - Payment Methods
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Payment method deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /charges:
+    get:
+      operationId: listCharges
+      summary: List Charges
+      description: Returns a paginated list of charges.
+      tags:
+        - Charges
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response with charge list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeListResponse'
+    post:
+      operationId: createCharge
+      summary: Create Charge
+      description: Creates a new charge against a payment method or debt account.
+      tags:
+        - Charges
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeRequest'
+      responses:
+        '201':
+          description: Charge created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /charges/{id}:
+    get:
+      operationId: getCharge
+      summary: Get Charge
+      description: Returns a single charge by ID.
+      tags:
+        - Charges
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChargeResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /transactions:
+    get:
+      operationId: listTransactions
+      summary: List Transactions
+      description: Returns a paginated list of payment transactions.
+      tags:
+        - Transactions
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/PageParam'
+        - $ref: '#/components/parameters/IncludeParam'
+        - name: start_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Filter transactions from this date
+        - name: end_date
+          in: query
+          required: false
+          schema:
+            type: string
+            format: date
+          description: Filter transactions to this date
+      responses:
+        '200':
+          description: Successful response with transaction list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionListResponse'
+  /transactions/{id}:
+    get:
+      operationId: getTransaction
+      summary: Get Transaction
+      description: Returns a single transaction by ID.
+      tags:
+        - Transactions
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List Webhooks
+      description: Returns all configured webhooks for the organization.
+      tags:
+        - Webhooks
+      responses:
+        '200':
+          description: Successful response with webhook list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookListResponse'
+    post:
+      operationId: createWebhook
+      summary: Create Webhook
+      description: Creates a new webhook endpoint for event notifications.
+      tags:
+        - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookRequest'
+      responses:
+        '201':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /webhooks/{id}:
+    delete:
+      operationId: deleteWebhook
+      summary: Delete Webhook
+      description: Deletes a webhook configuration.
+      tags:
+        - Webhooks
+      parameters:
+        - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Webhook deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /customer_sessions:
+    post:
+      operationId: createCustomerSession
+      summary: Create Customer Session
+      description: >-
+        Creates a secure customer session and returns a magic link for
+        instant portal access without login credentials.
+      tags:
+        - Customer Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerSessionRequest'
+      responses:
+        '201':
+          description: Customer session created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerSessionResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /bulk/debt_accounts:
+    post:
+      operationId: bulkImportDebtAccounts
+      summary: Bulk Import Debt Accounts
+      description: Imports multiple debt accounts in a single request.
+      tags:
+        - Bulk Operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDebtAccountRequest'
+      responses:
+        '201':
+          description: Bulk import initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /tickets:
+    get:
+      operationId: listTickets
+      summary: List Tickets
+      description: Returns a paginated list of support tickets.
+      tags:
+        - Tickets
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/PageParam'
+      responses:
+        '200':
+          description: Successful response with ticket list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketListResponse'
+    post:
+      operationId: createTicket
+      summary: Create Ticket
+      description: Creates a new support ticket.
+      tags:
+        - Tickets
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketRequest'
+      responses:
+        '201':
+          description: Ticket created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token provided by Tratta after organization setup
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 500
+      description: Number of records per page (1-500)
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: >-
+        Comma-delimited list of related resources to include in response
+        (e.g., customers,payment_methods)
+  responses:
+    Unauthorized:
+      description: Unauthorized - invalid or missing bearer token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - valid data but request failed
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+        last:
+          type: string
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    CustomerRequest:
+      type: object
+      required:
+        - first_name
+        - last_name
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    CustomerResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Customer'
+    CustomerListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    DebtAccount:
+      type: object
+      properties:
+        id:
+          type: string
+        customer_id:
+          type: string
+        account_number:
+          type: string
+        original_balance:
+          type: number
+          format: float
+        current_balance:
+          type: number
+          format: float
+        status:
+          type: string
+          enum: [active, resolved, closed]
+        created_at:
+          type: string
+          format: date-time
+    DebtAccountRequest:
+      type: object
+      required:
+        - customer_id
+        - original_balance
+      properties:
+        customer_id:
+          type: string
+        account_number:
+          type: string
+        original_balance:
+          type: number
+          format: float
+        description:
+          type: string
+    DebtAccountResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/DebtAccount'
+    DebtAccountListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DebtAccount'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    PaymentPlan:
+      type: object
+      properties:
+        id:
+          type: string
+        debt_account_id:
+          type: string
+        total_amount:
+          type: number
+          format: float
+        installment_amount:
+          type: number
+          format: float
+        frequency:
+          type: string
+          enum: [weekly, biweekly, monthly]
+        status:
+          type: string
+          enum: [active, paused, completed, cancelled]
+        payment_source:
+          type: string
+        start_date:
+          type: string
+          format: date
+        next_payment_date:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+    PaymentPlanRequest:
+      type: object
+      required:
+        - debt_account_id
+        - total_amount
+        - installment_amount
+        - frequency
+      properties:
+        debt_account_id:
+          type: string
+        total_amount:
+          type: number
+          format: float
+        installment_amount:
+          type: number
+          format: float
+        frequency:
+          type: string
+          enum: [weekly, biweekly, monthly]
+        start_date:
+          type: string
+          format: date
+        payment_method_id:
+          type: string
+    PaymentPlanResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentPlan'
+    PaymentPlanListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentPlan'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum: [card, bank_account]
+        last_four:
+          type: string
+        brand:
+          type: string
+        expiry_month:
+          type: integer
+        expiry_year:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    PaymentMethodRequest:
+      type: object
+      required:
+        - type
+        - token
+      properties:
+        type:
+          type: string
+          enum: [card, bank_account]
+        token:
+          type: string
+          description: Tokenized payment data from payment processor
+        customer_id:
+          type: string
+    PaymentMethodResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethodListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    Charge:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+          format: float
+        status:
+          type: string
+          enum: [pending, completed, failed, refunded]
+        payment_method_id:
+          type: string
+        debt_account_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    ChargeRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: number
+          format: float
+        payment_method_id:
+          type: string
+        debt_account_id:
+          type: string
+        description:
+          type: string
+    ChargeResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Charge'
+    ChargeListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Charge'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    Transaction:
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+          format: float
+        type:
+          type: string
+          enum: [payment, refund, reversal]
+        status:
+          type: string
+          enum: [pending, completed, failed]
+        payment_source:
+          type: string
+        charge_id:
+          type: string
+        payment_plan_id:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+    TransactionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Transaction'
+    TransactionListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Transaction'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    WebhookRequest:
+      type: object
+      required:
+        - url
+        - events
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+              - payment_plan.created
+              - payment_plan.updated
+              - payment_plan.completed
+              - payment_plan.cancelled
+              - charge.completed
+              - charge.failed
+              - transaction.completed
+    WebhookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
+    WebhookListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+    CustomerSessionRequest:
+      type: object
+      required:
+        - customer_id
+      properties:
+        customer_id:
+          type: string
+        redirect_url:
+          type: string
+          format: uri
+        expires_in:
+          type: integer
+          description: Session expiry in seconds
+    CustomerSessionResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            magic_link:
+              type: string
+              format: uri
+            expires_at:
+              type: string
+              format: date-time
+    BulkDebtAccountRequest:
+      type: object
+      required:
+        - debt_accounts
+      properties:
+        debt_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DebtAccountRequest'
+    BulkOperationResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            status:
+              type: string
+              enum: [pending, processing, completed, failed]
+            total:
+              type: integer
+            processed:
+              type: integer
+            failed:
+              type: integer
+    Ticket:
+      type: object
+      properties:
+        id:
+          type: string
+        subject:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [open, in_progress, resolved, closed]
+        created_at:
+          type: string
+          format: date-time
+    TicketRequest:
+      type: object
+      required:
+        - subject
+        - description
+      properties:
+        subject:
+          type: string
+        description:
+          type: string
+        customer_id:
+          type: string
+        debt_account_id:
+          type: string
+    TicketResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Ticket'
+    TicketListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticket'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'

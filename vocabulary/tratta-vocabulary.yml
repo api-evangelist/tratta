@@ -1,0 +1,142 @@
+name: Tratta Vocabulary
+description: Domain vocabulary for the Tratta debt collection and payment experience platform
+tags:
+  - Debt Collection
+  - Payments
+  - Billing
+  - Fintech
+  - Collections
+terms:
+  - term: Debt Account
+    label: Debt Account
+    definition: A record representing an outstanding financial obligation owed by a consumer, imported into Tratta from a system of record
+    properties:
+      - original_balance
+      - current_balance
+      - status
+      - account_number
+
+  - term: Payment Plan
+    label: Payment Plan
+    definition: A structured agreement for a consumer to pay off a debt account in scheduled installments over time
+    properties:
+      - installment_amount
+      - frequency
+      - start_date
+      - status
+
+  - term: Charge
+    label: Charge
+    definition: A payment transaction initiated against a stored payment method to collect funds
+    related:
+      - Payment Method
+      - Transaction
+
+  - term: Transaction
+    label: Transaction
+    definition: A completed or attempted financial exchange recorded in the Tratta platform
+    properties:
+      - amount
+      - type
+      - status
+      - payment_source
+
+  - term: Payment Method
+    label: Payment Method
+    definition: A stored payment instrument (credit/debit card or bank account) that can be used to process charges
+    values:
+      - card
+      - bank_account
+
+  - term: Customer Session
+    label: Customer Session
+    definition: A secure, time-limited session that generates a magic link for consumers to access the self-service payment portal without requiring a login
+    related:
+      - Magic Link
+      - Portal
+
+  - term: Magic Link
+    label: Magic Link
+    definition: A one-time URL sent to a customer that provides instant authenticated access to their payment portal
+    related:
+      - Customer Session
+      - Portal
+
+  - term: Webhook
+    label: Webhook
+    definition: An HTTP callback registered to receive real-time notifications when payment plan or transaction events occur
+    related:
+      - Event
+      - Notification
+
+  - term: Payment Source
+    label: Payment Source
+    definition: The channel through which a payment was initiated (API, customer portal, IVR, or agent)
+    values:
+      - api
+      - portal
+      - ivr
+      - agent
+
+  - term: Bulk Operation
+    label: Bulk Operation
+    definition: An API operation that processes multiple records in a single request, used for importing debt accounts or exporting data
+    related:
+      - Import
+      - Export
+
+  - term: Just In Time
+    label: Just-In-Time Verification
+    definition: A real-time IVR verification mechanism used to authorize payments during automated phone collection calls
+    related:
+      - IVR
+      - Payment
+
+  - term: IVR
+    label: Interactive Voice Response
+    definition: Automated phone system used in collections workflows to accept payments from consumers
+    related:
+      - Just-In-Time
+      - Payment Source
+
+  - term: TCPA
+    label: TCPA Compliance
+    definition: Compliance with the Telephone Consumer Protection Act, governing automated calling and texting practices in debt collection
+    related:
+      - Collections
+      - Compliance
+
+  - term: System of Record
+    label: System of Record
+    definition: The authoritative source of debt account data (e.g., Artiva, StratusPay) that synchronizes with Tratta
+    related:
+      - Integration
+      - Import
+
+  - term: Snowflake
+    label: Snowflake Data Warehouse
+    definition: Cloud data warehouse platform to which Tratta can replicate data for analytics and reporting
+    related:
+      - Data Warehouse
+      - Integration
+
+  - term: SFTP
+    label: Secure File Transfer Protocol
+    definition: Secure file exchange method used to transfer debt account data between Tratta and system-of-record platforms
+    related:
+      - Import
+      - Integration
+
+  - term: Rate Limit
+    label: Rate Limit
+    definition: The maximum number of API requests allowed per minute (default 300 requests/minute) before a 429 error is returned
+    related:
+      - API
+      - Throttling
+
+  - term: Organization UUID
+    label: Organization UUID
+    definition: A unique identifier assigned to each Tratta customer organization, used as part of the API base URL
+    related:
+      - Authentication
+      - API

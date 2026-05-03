@@ -1,0 +1,438 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Tratta API"
+  description: "Debt collection and payment experience platform API for managing debt accounts, payment plans, transactions, customers, and webhooks."
+  tags:
+    - Billing
+    - Collections
+    - Payments
+    - Debt Collection
+    - Fintech
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TRATTA_BEARER_TOKEN: TRATTA_BEARER_TOKEN
+      TRATTA_ORG_UUID: TRATTA_ORG_UUID
+
+capability:
+  consumes:
+    - type: http
+      namespace: tratta
+      baseUri: https://{{TRATTA_ORG_UUID}}.production.tratta.io/api/v1
+      description: "Tratta debt collection and payment management REST API."
+      authentication:
+        type: bearer
+        token: "{{TRATTA_BEARER_TOKEN}}"
+      resources:
+        - name: customers
+          path: /customers
+          description: "Customer account management"
+          operations:
+            - name: list-customers
+              method: GET
+              description: "List customers with pagination"
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Records per page (1-500)"
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number"
+                - name: include
+                  in: query
+                  type: string
+                  required: false
+                  description: "Related resources to include"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-customer
+              method: POST
+              description: "Create a new customer record"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  first_name: "{{tools.first_name}}"
+                  last_name: "{{tools.last_name}}"
+                  email: "{{tools.email}}"
+                  phone: "{{tools.phone}}"
+
+        - name: customers-by-id
+          path: /customers/{id}
+          description: "Individual customer operations"
+          operations:
+            - name: get-customer
+              method: GET
+              description: "Get a customer by ID"
+              inputParameters:
+                - name: id
+                  in: path
+                  type: string
+                  required: true
+                  description: "Customer ID"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: debt-accounts
+          path: /debt_accounts
+          description: "Debt account operations"
+          operations:
+            - name: list-debt-accounts
+              method: GET
+              description: "List debt accounts with pagination"
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Records per page"
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-debt-account
+              method: POST
+              description: "Create a new debt account"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  customer_id: "{{tools.customer_id}}"
+                  original_balance: "{{tools.original_balance}}"
+                  account_number: "{{tools.account_number}}"
+
+        - name: payment-plans
+          path: /payment_plans
+          description: "Payment plan management"
+          operations:
+            - name: list-payment-plans
+              method: GET
+              description: "List payment plans"
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Records per page"
+                - name: page
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Page number"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-payment-plan
+              method: POST
+              description: "Create a payment plan for a debt account"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  debt_account_id: "{{tools.debt_account_id}}"
+                  total_amount: "{{tools.total_amount}}"
+                  installment_amount: "{{tools.installment_amount}}"
+                  frequency: "{{tools.frequency}}"
+
+        - name: payment-methods
+          path: /payment_methods
+          description: "Payment method storage"
+          operations:
+            - name: list-payment-methods
+              method: GET
+              description: "List stored payment methods"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-payment-method
+              method: POST
+              description: "Store a new payment method"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  type: "{{tools.type}}"
+                  token: "{{tools.token}}"
+
+        - name: charges
+          path: /charges
+          description: "Charge processing"
+          operations:
+            - name: list-charges
+              method: GET
+              description: "List charges"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-charge
+              method: POST
+              description: "Create a charge against a payment method"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  amount: "{{tools.amount}}"
+                  payment_method_id: "{{tools.payment_method_id}}"
+                  debt_account_id: "{{tools.debt_account_id}}"
+
+        - name: transactions
+          path: /transactions
+          description: "Transaction history"
+          operations:
+            - name: list-transactions
+              method: GET
+              description: "List payment transactions"
+              inputParameters:
+                - name: limit
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Records per page"
+                - name: start_date
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter from date"
+                - name: end_date
+                  in: query
+                  type: string
+                  required: false
+                  description: "Filter to date"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: customer-sessions
+          path: /customer_sessions
+          description: "Customer portal session management"
+          operations:
+            - name: create-customer-session
+              method: POST
+              description: "Create a magic link session for customer portal access"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  customer_id: "{{tools.customer_id}}"
+                  redirect_url: "{{tools.redirect_url}}"
+                  expires_in: "{{tools.expires_in}}"
+
+        - name: webhooks
+          path: /webhooks
+          description: "Webhook configuration"
+          operations:
+            - name: list-webhooks
+              method: GET
+              description: "List configured webhooks"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+            - name: create-webhook
+              method: POST
+              description: "Create a webhook for event notifications"
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+              body:
+                type: json
+                data:
+                  url: "{{tools.url}}"
+                  events: "{{tools.events}}"
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: tratta-rest
+      resources:
+        - path: /v1/customers
+          name: customers
+          operations:
+            - method: GET
+              name: list-customers
+              description: "List customers"
+              call: "tratta.list-customers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-customer
+              description: "Create a customer"
+              call: "tratta.create-customer"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/debt-accounts
+          name: debt-accounts
+          operations:
+            - method: GET
+              name: list-debt-accounts
+              description: "List debt accounts"
+              call: "tratta.list-debt-accounts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-debt-account
+              description: "Create a debt account"
+              call: "tratta.create-debt-account"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/payment-plans
+          name: payment-plans
+          operations:
+            - method: GET
+              name: list-payment-plans
+              description: "List payment plans"
+              call: "tratta.list-payment-plans"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-payment-plan
+              description: "Create a payment plan"
+              call: "tratta.create-payment-plan"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/transactions
+          name: transactions
+          operations:
+            - method: GET
+              name: list-transactions
+              description: "List transactions"
+              call: "tratta.list-transactions"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: tratta-mcp
+      transport: http
+      tools:
+        - name: list-customers
+          description: "List customers in the Tratta organization"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tratta.list-customers"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-customer
+          description: "Create a new customer record in Tratta"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-customer"
+          with:
+            first_name: "tools.first_name"
+            last_name: "tools.last_name"
+            email: "tools.email"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-debt-accounts
+          description: "List debt accounts"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tratta.list-debt-accounts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-payment-plan
+          description: "Create a payment plan for a debt account"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-payment-plan"
+          with:
+            debt_account_id: "tools.debt_account_id"
+            total_amount: "tools.total_amount"
+            installment_amount: "tools.installment_amount"
+            frequency: "tools.frequency"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-transactions
+          description: "List payment transactions with optional date range"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tratta.list-transactions"
+          with:
+            start_date: "tools.start_date"
+            end_date: "tools.end_date"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-customer-session
+          description: "Create a magic link for customer portal access"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-customer-session"
+          with:
+            customer_id: "tools.customer_id"
+            redirect_url: "tools.redirect_url"
+          outputParameters:
+            - type: object
+              mapping: "$."

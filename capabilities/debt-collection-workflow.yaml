@@ -1,0 +1,333 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Tratta Debt Collection Workflow"
+  description: >-
+    Workflow capability for debt collection and payment recovery operations.
+    Enables collections teams and system integrators to manage the full debt
+    collection lifecycle: importing debt accounts, creating payment plans,
+    processing charges, generating customer portal sessions, and tracking
+    transactions.
+  tags:
+    - Billing
+    - Collections
+    - Payments
+    - Debt Collection
+    - Fintech
+    - Payment Plans
+    - Transactions
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      TRATTA_BEARER_TOKEN: TRATTA_BEARER_TOKEN
+      TRATTA_ORG_UUID: TRATTA_ORG_UUID
+
+capability:
+  consumes:
+    - import: tratta
+      location: ./shared/tratta.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: debt-collection-api
+      description: "Unified REST API for debt collection and payment recovery workflows."
+      resources:
+        - path: /v1/customers
+          name: customers
+          description: "Customer account management"
+          operations:
+            - method: GET
+              name: list-customers
+              description: "List customers in the organization"
+              call: "tratta.list-customers"
+              with:
+                limit: "rest.limit"
+                page: "rest.page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-customer
+              description: "Create a new customer record"
+              call: "tratta.create-customer"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/debt-accounts
+          name: debt-accounts
+          description: "Debt account portfolio management"
+          operations:
+            - method: GET
+              name: list-debt-accounts
+              description: "List all debt accounts"
+              call: "tratta.list-debt-accounts"
+              with:
+                limit: "rest.limit"
+                page: "rest.page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-debt-account
+              description: "Create a debt account for a customer"
+              call: "tratta.create-debt-account"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payment-plans
+          name: payment-plans
+          description: "Payment plan management and tracking"
+          operations:
+            - method: GET
+              name: list-payment-plans
+              description: "List all payment plans"
+              call: "tratta.list-payment-plans"
+              with:
+                limit: "rest.limit"
+                page: "rest.page"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-payment-plan
+              description: "Create a payment plan for a debt account"
+              call: "tratta.create-payment-plan"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/charges
+          name: charges
+          description: "Charge processing"
+          operations:
+            - method: GET
+              name: list-charges
+              description: "List charges"
+              call: "tratta.list-charges"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-charge
+              description: "Process a charge against a payment method"
+              call: "tratta.create-charge"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/transactions
+          name: transactions
+          description: "Transaction history and reporting"
+          operations:
+            - method: GET
+              name: list-transactions
+              description: "List payment transactions with date filtering"
+              call: "tratta.list-transactions"
+              with:
+                start_date: "rest.start_date"
+                end_date: "rest.end_date"
+                limit: "rest.limit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/customer-sessions
+          name: customer-sessions
+          description: "Secure customer portal sessions"
+          operations:
+            - method: POST
+              name: create-customer-session
+              description: "Generate a magic link for customer portal access"
+              call: "tratta.create-customer-session"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payment-methods
+          name: payment-methods
+          description: "Stored payment methods"
+          operations:
+            - method: GET
+              name: list-payment-methods
+              description: "List stored payment methods"
+              call: "tratta.list-payment-methods"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-payment-method
+              description: "Store a new payment method"
+              call: "tratta.create-payment-method"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/webhooks
+          name: webhooks
+          description: "Webhook event subscriptions"
+          operations:
+            - method: GET
+              name: list-webhooks
+              description: "List configured webhooks"
+              call: "tratta.list-webhooks"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: POST
+              name: create-webhook
+              description: "Create a webhook for payment events"
+              call: "tratta.create-webhook"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: debt-collection-mcp
+      transport: http
+      description: "MCP server for AI-assisted debt collection and payment recovery."
+      tools:
+        - name: list-customers
+          description: "List customers in the collections portfolio"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tratta.list-customers"
+          with:
+            limit: "tools.limit"
+            page: "tools.page"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-customer
+          description: "Add a new customer to the collections system"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-customer"
+          with:
+            first_name: "tools.first_name"
+            last_name: "tools.last_name"
+            email: "tools.email"
+            phone: "tools.phone"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-debt-accounts
+          description: "List debt accounts in the portfolio"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tratta.list-debt-accounts"
+          with:
+            limit: "tools.limit"
+            page: "tools.page"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-debt-account
+          description: "Create a new debt account for a customer"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-debt-account"
+          with:
+            customer_id: "tools.customer_id"
+            original_balance: "tools.original_balance"
+            account_number: "tools.account_number"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-payment-plans
+          description: "List active and historical payment plans"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tratta.list-payment-plans"
+          with:
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-payment-plan
+          description: "Set up a payment plan for a debt account"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-payment-plan"
+          with:
+            debt_account_id: "tools.debt_account_id"
+            total_amount: "tools.total_amount"
+            installment_amount: "tools.installment_amount"
+            frequency: "tools.frequency"
+            start_date: "tools.start_date"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: list-transactions
+          description: "List payment transactions with optional date range filter"
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "tratta.list-transactions"
+          with:
+            start_date: "tools.start_date"
+            end_date: "tools.end_date"
+            limit: "tools.limit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-customer-session
+          description: "Generate a magic link for a customer to access their payment portal"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-customer-session"
+          with:
+            customer_id: "tools.customer_id"
+            redirect_url: "tools.redirect_url"
+            expires_in: "tools.expires_in"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-charge
+          description: "Process a one-time charge against a stored payment method"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "tratta.create-charge"
+          with:
+            amount: "tools.amount"
+            payment_method_id: "tools.payment_method_id"
+            debt_account_id: "tools.debt_account_id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-webhook
+          description: "Subscribe to payment plan and transaction events via webhook"
+          hints:
+            readOnly: false
+            openWorld: false
+          call: "tratta.create-webhook"
+          with:
+            url: "tools.url"
+            events: "tools.events"
+          outputParameters:
+            - type: object
+              mapping: "$."
