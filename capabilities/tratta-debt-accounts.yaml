@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tratta API — Debt Accounts
+  description: 'Tratta API — Debt Accounts. 3 operations. Lead operation: List Debt Accounts. Self-contained Naftiko capability
+    covering one Tratta business surface.'
+  tags:
+  - Tratta
+  - Debt Accounts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRATTA_API_KEY: TRATTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tratta-debt-accounts
+    baseUri: https://{org-uuid}.production.tratta.io/api/v1
+    description: Tratta API — Debt Accounts business capability. Self-contained, no shared references.
+    resources:
+    - name: debt_accounts
+      path: /debt_accounts
+      operations:
+      - name: listdebtaccounts
+        method: GET
+        description: List Debt Accounts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createdebtaccount
+        method: POST
+        description: Create Debt Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: debt_accounts-id
+      path: /debt_accounts/{id}
+      operations:
+      - name: getdebtaccount
+        method: GET
+        description: Get Debt Account
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.TRATTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tratta-debt-accounts-rest
+    port: 8080
+    description: REST adapter for Tratta API — Debt Accounts. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/debt-accounts
+      name: debt-accounts
+      description: REST surface for debt_accounts.
+      operations:
+      - method: GET
+        name: listdebtaccounts
+        description: List Debt Accounts
+        call: tratta-debt-accounts.listdebtaccounts
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createdebtaccount
+        description: Create Debt Account
+        call: tratta-debt-accounts.createdebtaccount
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/debt-accounts/{id}
+      name: debt-accounts-id
+      description: REST surface for debt_accounts-id.
+      operations:
+      - method: GET
+        name: getdebtaccount
+        description: Get Debt Account
+        call: tratta-debt-accounts.getdebtaccount
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tratta-debt-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tratta API — Debt Accounts. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-debt-accounts
+      description: List Debt Accounts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tratta-debt-accounts.listdebtaccounts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-debt-account
+      description: Create Debt Account
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tratta-debt-accounts.createdebtaccount
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-debt-account
+      description: Get Debt Account
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tratta-debt-accounts.getdebtaccount
+      outputParameters:
+      - type: object
+        mapping: $.

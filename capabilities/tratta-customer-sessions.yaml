@@ -1,0 +1,80 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tratta API — Customer Sessions
+  description: 'Tratta API — Customer Sessions. 1 operations. Lead operation: Create Customer Session. Self-contained Naftiko
+    capability covering one Tratta business surface.'
+  tags:
+  - Tratta
+  - Customer Sessions
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRATTA_API_KEY: TRATTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tratta-customer-sessions
+    baseUri: https://{org-uuid}.production.tratta.io/api/v1
+    description: Tratta API — Customer Sessions business capability. Self-contained, no shared references.
+    resources:
+    - name: customer_sessions
+      path: /customer_sessions
+      operations:
+      - name: createcustomersession
+        method: POST
+        description: Create Customer Session
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TRATTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tratta-customer-sessions-rest
+    port: 8080
+    description: REST adapter for Tratta API — Customer Sessions. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/customer-sessions
+      name: customer-sessions
+      description: REST surface for customer_sessions.
+      operations:
+      - method: POST
+        name: createcustomersession
+        description: Create Customer Session
+        call: tratta-customer-sessions.createcustomersession
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tratta-customer-sessions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tratta API — Customer Sessions. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: create-customer-session
+      description: Create Customer Session
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tratta-customer-sessions.createcustomersession
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,137 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tratta API — Webhooks
+  description: 'Tratta API — Webhooks. 3 operations. Lead operation: List Webhooks. Self-contained Naftiko capability covering
+    one Tratta business surface.'
+  tags:
+  - Tratta
+  - Webhooks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRATTA_API_KEY: TRATTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tratta-webhooks
+    baseUri: https://{org-uuid}.production.tratta.io/api/v1
+    description: Tratta API — Webhooks business capability. Self-contained, no shared references.
+    resources:
+    - name: webhooks
+      path: /webhooks
+      operations:
+      - name: listwebhooks
+        method: GET
+        description: List Webhooks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createwebhook
+        method: POST
+        description: Create Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: webhooks-id
+      path: /webhooks/{id}
+      operations:
+      - name: deletewebhook
+        method: DELETE
+        description: Delete Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.TRATTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tratta-webhooks-rest
+    port: 8080
+    description: REST adapter for Tratta API — Webhooks. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/webhooks
+      name: webhooks
+      description: REST surface for webhooks.
+      operations:
+      - method: GET
+        name: listwebhooks
+        description: List Webhooks
+        call: tratta-webhooks.listwebhooks
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createwebhook
+        description: Create Webhook
+        call: tratta-webhooks.createwebhook
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/webhooks/{id}
+      name: webhooks-id
+      description: REST surface for webhooks-id.
+      operations:
+      - method: DELETE
+        name: deletewebhook
+        description: Delete Webhook
+        call: tratta-webhooks.deletewebhook
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tratta-webhooks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tratta API — Webhooks. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-webhooks
+      description: List Webhooks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tratta-webhooks.listwebhooks
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-webhook
+      description: Create Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tratta-webhooks.createwebhook
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-webhook
+      description: Delete Webhook
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: tratta-webhooks.deletewebhook
+      outputParameters:
+      - type: object
+        mapping: $.

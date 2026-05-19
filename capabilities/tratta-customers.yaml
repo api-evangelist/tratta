@@ -1,0 +1,172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Tratta API — Customers
+  description: 'Tratta API — Customers. 4 operations. Lead operation: List Customers. Self-contained Naftiko capability covering
+    one Tratta business surface.'
+  tags:
+  - Tratta
+  - Customers
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TRATTA_API_KEY: TRATTA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: tratta-customers
+    baseUri: https://{org-uuid}.production.tratta.io/api/v1
+    description: Tratta API — Customers business capability. Self-contained, no shared references.
+    resources:
+    - name: customers
+      path: /customers
+      operations:
+      - name: listcustomers
+        method: GET
+        description: List Customers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createcustomer
+        method: POST
+        description: Create Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: customers-id
+      path: /customers/{id}
+      operations:
+      - name: getcustomer
+        method: GET
+        description: Get Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatecustomer
+        method: PUT
+        description: Update Customer
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TRATTA_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: tratta-customers-rest
+    port: 8080
+    description: REST adapter for Tratta API — Customers. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/customers
+      name: customers
+      description: REST surface for customers.
+      operations:
+      - method: GET
+        name: listcustomers
+        description: List Customers
+        call: tratta-customers.listcustomers
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createcustomer
+        description: Create Customer
+        call: tratta-customers.createcustomer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/customers/{id}
+      name: customers-id
+      description: REST surface for customers-id.
+      operations:
+      - method: GET
+        name: getcustomer
+        description: Get Customer
+        call: tratta-customers.getcustomer
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updatecustomer
+        description: Update Customer
+        call: tratta-customers.updatecustomer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: tratta-customers-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Tratta API — Customers. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: list-customers
+      description: List Customers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tratta-customers.listcustomers
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-customer
+      description: Create Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: tratta-customers.createcustomer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-customer
+      description: Get Customer
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: tratta-customers.getcustomer
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-customer
+      description: Update Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: tratta-customers.updatecustomer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
