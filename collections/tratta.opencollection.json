@@ -1,0 +1,675 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tratta API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/customers",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of customers in the organization."
+        },
+        {
+          "info": {
+            "name": "Create Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/customers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new customer record."
+        },
+        {
+          "info": {
+            "name": "Get Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a single customer by ID."
+        },
+        {
+          "info": {
+            "name": "Update Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/customers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing customer record."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Debt Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Debt Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/debt_accounts",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of debt accounts."
+        },
+        {
+          "info": {
+            "name": "Create Debt Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/debt_accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new debt account for a customer."
+        },
+        {
+          "info": {
+            "name": "Get Debt Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/debt_accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a single debt account by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payment Plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_plans",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of payment plans."
+        },
+        {
+          "info": {
+            "name": "Create Payment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_plans",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new payment plan for a debt account."
+        },
+        {
+          "info": {
+            "name": "Get Payment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_plans/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a single payment plan by ID."
+        },
+        {
+          "info": {
+            "name": "Update Payment Plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_plans/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates an existing payment plan."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment Methods",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Payment Methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_methods",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Returns a list of stored payment methods."
+        },
+        {
+          "info": {
+            "name": "Create Payment Method",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_methods",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a standalone payment method that can be used for future charges. Supports card and bank account payment types."
+        },
+        {
+          "info": {
+            "name": "Get Payment Method",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_methods/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ]
+          },
+          "docs": "Returns a single payment method by ID."
+        },
+        {
+          "info": {
+            "name": "Delete Payment Method",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/payment_methods/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ]
+          },
+          "docs": "Deletes a stored payment method."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Charges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/charges",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of charges."
+        },
+        {
+          "info": {
+            "name": "Create Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new charge against a payment method or debt account."
+        },
+        {
+          "info": {
+            "name": "Get Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/charges/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ]
+          },
+          "docs": "Returns a single charge by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/transactions",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              },
+              {
+                "name": "start_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter transactions from this date"
+              },
+              {
+                "name": "end_date",
+                "value": "",
+                "type": "query",
+                "description": "Filter transactions to this date"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of payment transactions."
+        },
+        {
+          "info": {
+            "name": "Get Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/transactions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ]
+          },
+          "docs": "Returns a single transaction by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Webhooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Webhooks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/webhooks"
+          },
+          "docs": "Returns all configured webhooks for the organization."
+        },
+        {
+          "info": {
+            "name": "Create Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/webhooks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new webhook endpoint for event notifications."
+        },
+        {
+          "info": {
+            "name": "Delete Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/webhooks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ]
+          },
+          "docs": "Deletes a webhook configuration."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Customer Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Customer Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/customer_sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a secure customer session and returns a magic link for instant portal access without login credentials."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bulk Operations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bulk Import Debt Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/bulk/debt_accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Imports multiple debt accounts in a single request."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tickets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tickets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/tickets",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of support tickets."
+        },
+        {
+          "info": {
+            "name": "Create Ticket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/tickets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new support ticket."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

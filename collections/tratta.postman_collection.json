@@ -1,0 +1,4545 @@
+{
+  "item": [
+    {
+      "id": "92ec4d87-a91f-4af6-9cf8-d37136756a51",
+      "name": "Customers",
+      "description": {
+        "content": "Customer account management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7eec557c-8233-461a-a07f-4034480b90b9",
+          "name": "List Customers",
+          "request": {
+            "name": "List Customers",
+            "description": {
+              "content": "Returns a paginated list of customers in the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0d6a95e9-50d2-40ad-9d65-c3ebf9b0b611",
+              "name": "Successful response with customer list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"utHq1xXSpufMtT1@JCfSgcoMNHvNwvrhHJnpuykfRa.jck\",\n      \"phone\": \"string\",\n      \"created_at\": \"2022-04-02T12:30:26.765Z\",\n      \"updated_at\": \"1965-04-09T19:53:20.498Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"7VHVtjeLoOC@hwBdBAOgbH.dih\",\n      \"phone\": \"string\",\n      \"created_at\": \"2011-10-07T16:51:54.865Z\",\n      \"updated_at\": \"2002-01-28T22:44:56.939Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 5752,\n    \"current_page\": 8453,\n    \"per_page\": 5414,\n    \"total_pages\": 7590\n  },\n  \"links\": {\n    \"first\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "383ccc2d-a5a8-4908-91ab-3c44271cf04c",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "275525dc-518d-4c5a-990d-be4a49220f79",
+          "name": "Create Customer",
+          "request": {
+            "name": "Create Customer",
+            "description": {
+              "content": "Creates a new customer record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "125a9f73-f5a7-49de-9a25-d17870a6e572",
+              "name": "Customer created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"nxXP9FP8qLmQVK@fnHLuqy.fna\",\n    \"phone\": \"string\",\n    \"created_at\": \"2004-03-15T02:58:57.998Z\",\n    \"updated_at\": \"2003-12-08T01:29:53.883Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b69634ca-170d-498f-8e67-0ec67bb5d4ea",
+              "name": "Bad request - valid data but request failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b39f321-a02d-4b16-a75e-03cd81b4a468",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca404f28-67fb-4b65-9e1b-48b7c754d4e4",
+          "name": "Get Customer",
+          "request": {
+            "name": "Get Customer",
+            "description": {
+              "content": "Returns a single customer by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2d93c4ee-5fea-417d-b0c7-5a4901b2231e",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"nxXP9FP8qLmQVK@fnHLuqy.fna\",\n    \"phone\": \"string\",\n    \"created_at\": \"2004-03-15T02:58:57.998Z\",\n    \"updated_at\": \"2003-12-08T01:29:53.883Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba50df6d-800d-42f5-b718-35923c87c6fa",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "badad774-7462-49c9-bf84-af0cecf4bd8c",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "95c93c07-c601-4887-91a9-231dfe2fe479",
+          "name": "Update Customer",
+          "request": {
+            "name": "Update Customer",
+            "description": {
+              "content": "Updates an existing customer record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d0b960b2-19cd-4f41-99bd-6a3dd93b4d8e",
+              "name": "Customer updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"nxXP9FP8qLmQVK@fnHLuqy.fna\",\n    \"phone\": \"string\",\n    \"created_at\": \"2004-03-15T02:58:57.998Z\",\n    \"updated_at\": \"2003-12-08T01:29:53.883Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37350fcc-64de-46c4-b5db-2d5d04c3667e",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<email>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "efb123f9-e993-41ab-958b-b6dee92bf0c7",
+      "name": "Debt Accounts",
+      "description": {
+        "content": "Debt account operations and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "04b06ff4-970e-4fe7-ad38-90c1bc2355a5",
+          "name": "List Debt Accounts",
+          "request": {
+            "name": "List Debt Accounts",
+            "description": {
+              "content": "Returns a paginated list of debt accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "debt_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "263c8ed7-e51b-40ad-b4f5-af060b672b5a",
+              "name": "Successful response with debt account list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debt_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"customer_id\": \"string\",\n      \"account_number\": \"string\",\n      \"original_balance\": 284.6175009896601,\n      \"current_balance\": 2408.666275055009,\n      \"status\": \"closed\",\n      \"created_at\": \"1973-07-21T18:32:06.296Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"customer_id\": \"string\",\n      \"account_number\": \"string\",\n      \"original_balance\": 8750.599851045456,\n      \"current_balance\": 9147.426797458562,\n      \"status\": \"active\",\n      \"created_at\": \"1976-08-18T22:16:01.431Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 8475,\n    \"current_page\": 4301,\n    \"per_page\": 820,\n    \"total_pages\": 5187\n  },\n  \"links\": {\n    \"first\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b516828-7cfb-4559-94df-e0e777b8a748",
+              "name": "Unauthorized - invalid or missing bearer token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debt_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "424d0e24-16c3-446f-a8ac-1272d42b19a0",
+          "name": "Create Debt Account",
+          "request": {
+            "name": "Create Debt Account",
+            "description": {
+              "content": "Creates a new debt account for a customer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "debt_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"<string>\",\n  \"original_balance\": \"<float>\",\n  \"account_number\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddfd1987-94a9-4aeb-94aa-f18e113a8d2b",
+              "name": "Debt account created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debt_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"original_balance\": \"<float>\",\n  \"account_number\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"customer_id\": \"string\",\n    \"account_number\": \"string\",\n    \"original_balance\": 3204.1100478810636,\n    \"current_balance\": 9394.665087718422,\n    \"status\": \"closed\",\n    \"created_at\": \"1966-09-24T10:33:51.700Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34553bbb-ec43-4a2c-b4b8-6b70e92190f4",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debt_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"original_balance\": \"<float>\",\n  \"account_number\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f30ea53c-a43f-4668-903c-8b5d11eff5fa",
+          "name": "Get Debt Account",
+          "request": {
+            "name": "Get Debt Account",
+            "description": {
+              "content": "Returns a single debt account by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "debt_accounts",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2248536e-14b3-4c84-9c2a-e0c397d3dfb8",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debt_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"customer_id\": \"string\",\n    \"account_number\": \"string\",\n    \"original_balance\": 3204.1100478810636,\n    \"current_balance\": 9394.665087718422,\n    \"status\": \"closed\",\n    \"created_at\": \"1966-09-24T10:33:51.700Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e6948ea-ac05-4d5c-b024-20d33f84a784",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "debt_accounts",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cd22adfb-b24d-46a8-becc-eced391889a4",
+      "name": "Payment Plans",
+      "description": {
+        "content": "Payment plan creation and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ecf8b55-9ee9-4283-ba90-4f5c17df17cd",
+          "name": "List Payment Plans",
+          "request": {
+            "name": "List Payment Plans",
+            "description": {
+              "content": "Returns a paginated list of payment plans.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fe85706d-bc17-44d8-a3af-b2be08c4d98f",
+              "name": "Successful response with payment plan list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"debt_account_id\": \"string\",\n      \"total_amount\": 314.44849801648854,\n      \"installment_amount\": 230.4613016265522,\n      \"frequency\": \"biweekly\",\n      \"status\": \"paused\",\n      \"payment_source\": \"string\",\n      \"start_date\": \"1968-07-01\",\n      \"next_payment_date\": \"2002-01-10\",\n      \"created_at\": \"2014-04-18T12:27:21.638Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"debt_account_id\": \"string\",\n      \"total_amount\": 7219.429468579173,\n      \"installment_amount\": 6791.037989155965,\n      \"frequency\": \"monthly\",\n      \"status\": \"cancelled\",\n      \"payment_source\": \"string\",\n      \"start_date\": \"1952-08-24\",\n      \"next_payment_date\": \"2014-10-08\",\n      \"created_at\": \"2018-08-01T17:51:29.857Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 9765,\n    \"current_page\": 8445,\n    \"per_page\": 7739,\n    \"total_pages\": 7503\n  },\n  \"links\": {\n    \"first\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd49c2e1-c86e-4039-9e17-e1d2e0494342",
+          "name": "Create Payment Plan",
+          "request": {
+            "name": "Create Payment Plan",
+            "description": {
+              "content": "Creates a new payment plan for a debt account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"debt_account_id\": \"<string>\",\n  \"total_amount\": \"<float>\",\n  \"installment_amount\": \"<float>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"payment_method_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20c64b7b-403d-4d1f-99be-324d93330138",
+              "name": "Payment plan created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debt_account_id\": \"<string>\",\n  \"total_amount\": \"<float>\",\n  \"installment_amount\": \"<float>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"payment_method_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"debt_account_id\": \"string\",\n    \"total_amount\": 6112.99870764771,\n    \"installment_amount\": 3309.4656844090887,\n    \"frequency\": \"biweekly\",\n    \"status\": \"cancelled\",\n    \"payment_source\": \"string\",\n    \"start_date\": \"2016-10-21\",\n    \"next_payment_date\": \"1983-07-07\",\n    \"created_at\": \"1949-02-28T18:57:11.284Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01cc9190-25e0-4d39-a792-c1ce41f15e26",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debt_account_id\": \"<string>\",\n  \"total_amount\": \"<float>\",\n  \"installment_amount\": \"<float>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"payment_method_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5893d702-5562-41ce-9c84-fa5aa5d4a0c3",
+          "name": "Get Payment Plan",
+          "request": {
+            "name": "Get Payment Plan",
+            "description": {
+              "content": "Returns a single payment plan by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9b839b6b-7fbe-4d63-bcc3-859a4cb51302",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"debt_account_id\": \"string\",\n    \"total_amount\": 6112.99870764771,\n    \"installment_amount\": 3309.4656844090887,\n    \"frequency\": \"biweekly\",\n    \"status\": \"cancelled\",\n    \"payment_source\": \"string\",\n    \"start_date\": \"2016-10-21\",\n    \"next_payment_date\": \"1983-07-07\",\n    \"created_at\": \"1949-02-28T18:57:11.284Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e1a1be4-1408-4719-b3b4-7fdcacc89d80",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e825dd2-88d6-4fb0-8f64-a64912710348",
+          "name": "Update Payment Plan",
+          "request": {
+            "name": "Update Payment Plan",
+            "description": {
+              "content": "Updates an existing payment plan.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_plans",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"debt_account_id\": \"<string>\",\n  \"total_amount\": \"<float>\",\n  \"installment_amount\": \"<float>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"payment_method_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5a0b331-2563-4e3b-a826-b84c065c55b4",
+              "name": "Payment plan updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_plans",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debt_account_id\": \"<string>\",\n  \"total_amount\": \"<float>\",\n  \"installment_amount\": \"<float>\",\n  \"frequency\": \"<string>\",\n  \"start_date\": \"<date>\",\n  \"payment_method_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"debt_account_id\": \"string\",\n    \"total_amount\": 6112.99870764771,\n    \"installment_amount\": 3309.4656844090887,\n    \"frequency\": \"biweekly\",\n    \"status\": \"cancelled\",\n    \"payment_source\": \"string\",\n    \"start_date\": \"2016-10-21\",\n    \"next_payment_date\": \"1983-07-07\",\n    \"created_at\": \"1949-02-28T18:57:11.284Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "038835f5-8e1c-46e5-b3e5-d85be9af2ef6",
+      "name": "Payment Methods",
+      "description": {
+        "content": "Payment method storage and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2de40357-bffa-4956-9997-6eb358ea6c95",
+          "name": "List Payment Methods",
+          "request": {
+            "name": "List Payment Methods",
+            "description": {
+              "content": "Returns a list of stored payment methods.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "112ffda5-3532-430f-bf60-511be57a3e88",
+              "name": "Successful response with payment method list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"bank_account\",\n      \"last_four\": \"string\",\n      \"brand\": \"string\",\n      \"expiry_month\": 483,\n      \"expiry_year\": 4597,\n      \"created_at\": \"1969-09-23T20:31:19.336Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"card\",\n      \"last_four\": \"string\",\n      \"brand\": \"string\",\n      \"expiry_month\": 7139,\n      \"expiry_year\": 7733,\n      \"created_at\": \"2026-03-22T09:00:48.231Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 3559,\n    \"current_page\": 2153,\n    \"per_page\": 6738,\n    \"total_pages\": 9219\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86210e9e-631c-40d8-9128-b9193510ca18",
+          "name": "Create Payment Method",
+          "request": {
+            "name": "Create Payment Method",
+            "description": {
+              "content": "Creates a standalone payment method that can be used for future charges. Supports card and bank account payment types.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_methods"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"token\": \"<string>\",\n  \"customer_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6694231-5d43-4e3b-a8df-51bdd2c2c248",
+              "name": "Payment method created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"token\": \"<string>\",\n  \"customer_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"bank_account\",\n    \"last_four\": \"string\",\n    \"brand\": \"string\",\n    \"expiry_month\": 639,\n    \"expiry_year\": 1920,\n    \"created_at\": \"1946-09-23T10:02:37.857Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbddb876-a0c2-4ae1-9077-d7900676c929",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"token\": \"<string>\",\n  \"customer_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ed669d20-a475-4cb5-aef1-d22d7739f14b",
+          "name": "Get Payment Method",
+          "request": {
+            "name": "Get Payment Method",
+            "description": {
+              "content": "Returns a single payment method by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01b64f8e-a4f3-4796-9d64-91f052d61ead",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"type\": \"bank_account\",\n    \"last_four\": \"string\",\n    \"brand\": \"string\",\n    \"expiry_month\": 639,\n    \"expiry_year\": 1920,\n    \"created_at\": \"1946-09-23T10:02:37.857Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c278ad25-7033-4b72-956d-5566c6b18b37",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffc571d9-27bf-4a75-9893-9a3ac15f9cb0",
+          "name": "Delete Payment Method",
+          "request": {
+            "name": "Delete Payment Method",
+            "description": {
+              "content": "Deletes a stored payment method.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "payment_methods",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97b92ed0-38c0-4f3f-b1d5-0df6d1a0654b",
+              "name": "Payment method deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd723c91-efa4-4514-882a-408c4955bb44",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "payment_methods",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "4c3572e4-1c09-4690-980b-de9403b45ee2",
+      "name": "Charges",
+      "description": {
+        "content": "Charge processing and management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a00b2ba9-10aa-4a7b-a534-922e0d12426f",
+          "name": "List Charges",
+          "request": {
+            "name": "List Charges",
+            "description": {
+              "content": "Returns a paginated list of charges.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d6d02393-8f17-4aca-a192-62b27d710830",
+              "name": "Successful response with charge list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"amount\": 6022.579787665121,\n      \"status\": \"pending\",\n      \"payment_method_id\": \"string\",\n      \"debt_account_id\": \"string\",\n      \"created_at\": \"1984-02-29T18:40:33.710Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": 4410.599156445606,\n      \"status\": \"completed\",\n      \"payment_method_id\": \"string\",\n      \"debt_account_id\": \"string\",\n      \"created_at\": \"1959-06-14T02:40:25.124Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 4961,\n    \"current_page\": 9200,\n    \"per_page\": 633,\n    \"total_pages\": 8119\n  },\n  \"links\": {\n    \"first\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bfad5e3-bc4b-423b-9b38-8e60ffb35238",
+          "name": "Create Charge",
+          "request": {
+            "name": "Create Charge",
+            "description": {
+              "content": "Creates a new charge against a payment method or debt account.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<float>\",\n  \"payment_method_id\": \"<string>\",\n  \"debt_account_id\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f558e9f6-dfcd-4ebe-8188-4aea19573649",
+              "name": "Charge created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<float>\",\n  \"payment_method_id\": \"<string>\",\n  \"debt_account_id\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"amount\": 496.12048187892333,\n    \"status\": \"failed\",\n    \"payment_method_id\": \"string\",\n    \"debt_account_id\": \"string\",\n    \"created_at\": \"2012-08-03T21:58:53.448Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "86dc4184-277e-42bf-8a5c-2cf8d886b58b",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<float>\",\n  \"payment_method_id\": \"<string>\",\n  \"debt_account_id\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "16e5b26b-c304-46c3-81ec-c0a4b5384918",
+          "name": "Get Charge",
+          "request": {
+            "name": "Get Charge",
+            "description": {
+              "content": "Returns a single charge by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "charges",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2424d036-d565-4e26-9f2d-859762fb9e33",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"amount\": 496.12048187892333,\n    \"status\": \"failed\",\n    \"payment_method_id\": \"string\",\n    \"debt_account_id\": \"string\",\n    \"created_at\": \"2012-08-03T21:58:53.448Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "403dfc83-5b19-495a-aa8b-46b9da52a748",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "charges",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2591e242-95b2-4a66-a74d-f34d84b8c8ea",
+      "name": "Transactions",
+      "description": {
+        "content": "Transaction history and reporting",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3de53ed-75a9-4687-89d4-b9369f914cb0",
+          "name": "List Transactions",
+          "request": {
+            "name": "List Transactions",
+            "description": {
+              "content": "Returns a paginated list of payment transactions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "include",
+                  "value": "<string>",
+                  "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date",
+                  "value": "<date>",
+                  "description": "Filter transactions from this date"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_date",
+                  "value": "<date>",
+                  "description": "Filter transactions to this date"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "081e18bd-9d0c-4d21-a632-8d3749a2035f",
+              "name": "Successful response with transaction list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "include",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_date",
+                      "value": "<date>"
+                    },
+                    {
+                      "key": "end_date",
+                      "value": "<date>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"amount\": 9365.602997181737,\n      \"type\": \"reversal\",\n      \"status\": \"completed\",\n      \"payment_source\": \"string\",\n      \"charge_id\": \"string\",\n      \"payment_plan_id\": \"string\",\n      \"created_at\": \"1984-06-11T12:24:48.286Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"amount\": 1719.65213419502,\n      \"type\": \"refund\",\n      \"status\": \"completed\",\n      \"payment_source\": \"string\",\n      \"charge_id\": \"string\",\n      \"payment_plan_id\": \"string\",\n      \"created_at\": \"1958-08-30T14:22:17.570Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 4961,\n    \"current_page\": 768,\n    \"per_page\": 6926,\n    \"total_pages\": 8081\n  },\n  \"links\": {\n    \"first\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2faa99d8-2a38-48b5-baea-f252c85dbe37",
+          "name": "Get Transaction",
+          "request": {
+            "name": "Get Transaction",
+            "description": {
+              "content": "Returns a single transaction by ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transactions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "860746a5-8a6c-4771-8d58-85386be91e57",
+              "name": "Successful response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"amount\": 7298.673992415647,\n    \"type\": \"reversal\",\n    \"status\": \"failed\",\n    \"payment_source\": \"string\",\n    \"charge_id\": \"string\",\n    \"payment_plan_id\": \"string\",\n    \"created_at\": \"2011-06-29T11:37:54.377Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12ade1b9-7a3d-4514-8945-718a3f99c3c3",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transactions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "31caaeca-b33c-423a-b11a-ea76a0d445e3",
+      "name": "Blocks",
+      "description": {
+        "content": "Account block management",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "77acdc52-ba39-4661-880d-e80f3bff1ed0",
+      "name": "Tickets",
+      "description": {
+        "content": "Support ticket management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1f10063b-7b8f-423f-9904-c06175d7062f",
+          "name": "List Tickets",
+          "request": {
+            "name": "List Tickets",
+            "description": {
+              "content": "Returns a paginated list of support tickets.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of records per page (1-500)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for pagination"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3b1d24c3-2061-434d-beb3-49db5ce9e7a2",
+              "name": "Successful response with ticket list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"subject\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"closed\",\n      \"created_at\": \"2006-07-01T10:37:57.113Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"subject\": \"string\",\n      \"description\": \"string\",\n      \"status\": \"resolved\",\n      \"created_at\": \"2013-12-05T05:00:48.285Z\"\n    }\n  ],\n  \"meta\": {\n    \"total\": 9650,\n    \"current_page\": 3371,\n    \"per_page\": 1997,\n    \"total_pages\": 4629\n  },\n  \"links\": {\n    \"first\": \"string\",\n    \"prev\": \"string\",\n    \"next\": \"string\",\n    \"last\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "febea3ea-30ad-4058-9e48-f445998505d0",
+          "name": "Create Ticket",
+          "request": {
+            "name": "Create Ticket",
+            "description": {
+              "content": "Creates a new support ticket.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tickets"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subject\": \"<string>\",\n  \"description\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"debt_account_id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ae5db55-fc2c-499f-abf7-79d5f847fbc2",
+              "name": "Ticket created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tickets"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subject\": \"<string>\",\n  \"description\": \"<string>\",\n  \"customer_id\": \"<string>\",\n  \"debt_account_id\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"subject\": \"string\",\n    \"description\": \"string\",\n    \"status\": \"resolved\",\n    \"created_at\": \"1991-07-23T02:16:22.004Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "76da3915-e9ba-46de-9137-219ee980bd36",
+      "name": "Webhooks",
+      "description": {
+        "content": "Webhook configuration for event notifications",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e49889f-70b2-46a1-a4cf-156800e199e2",
+          "name": "List Webhooks",
+          "request": {
+            "name": "List Webhooks",
+            "description": {
+              "content": "Returns all configured webhooks for the organization.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "092606a4-93f5-4e69-b269-c3925373e09e",
+              "name": "Successful response with webhook list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"url\": \"https://JFEwjiQVuhVIWcIPvikJmTAzydO.tkncbjgW2czAK9+iaQ\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"active\": true,\n      \"created_at\": \"2015-09-02T18:52:00.232Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"url\": \"https://vFYztcguYzALewjlXf.yvnDeaVMbCjmWqZY1u9iNbYIgRmhZdhfEbSVGNrjNHz.0W8fVnF2H,0U+qcix6VsBaA\",\n      \"events\": [\n        \"string\",\n        \"string\"\n      ],\n      \"active\": true,\n      \"created_at\": \"1960-04-10T07:32:56.607Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8696c0f4-0818-4986-b5c0-7a176f2bf91c",
+          "name": "Create Webhook",
+          "request": {
+            "name": "Create Webhook",
+            "description": {
+              "content": "Creates a new webhook endpoint for event notifications.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bf04e301-3bf4-477a-b44a-1fc49af4c768",
+              "name": "Webhook created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"url\": \"https://NUlzoxcgsNceM.cswdp2KXE,Up0sWpPsqC35bqmrjrPG2A3YxuvMPLo2,mBlKoAP5W3\",\n    \"events\": [\n      \"string\",\n      \"string\"\n    ],\n    \"active\": false,\n    \"created_at\": \"1948-10-28T17:15:58.675Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17eac70b-018e-49bf-920a-c828d5aeacaa",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"<uri>\",\n  \"events\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21be6629-4f46-44cd-b22b-0131fff51cf8",
+          "name": "Delete Webhook",
+          "request": {
+            "name": "Delete Webhook",
+            "description": {
+              "content": "Deletes a webhook configuration.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "webhooks",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Resource unique identifier"
+                },
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d80e8df8-2942-44f4-afbd-2f94b2cf34b4",
+              "name": "Webhook deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7c9d8f27-78e3-4fbb-923b-77e7908ed354",
+              "name": "Resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "webhooks",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Resource unique identifier"
+                    },
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1ef04b46-5393-4787-a238-7fa1cb3e1f05",
+      "name": "Customer Sessions",
+      "description": {
+        "content": "Secure customer session management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9ef6cc82-fda9-4a10-bbf0-e255032bd955",
+          "name": "Create Customer Session",
+          "request": {
+            "name": "Create Customer Session",
+            "description": {
+              "content": "Creates a secure customer session and returns a magic link for instant portal access without login credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer_sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"expires_in\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6dc714e-7531-4d12-8d4f-9f284632fca9",
+              "name": "Customer session created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"expires_in\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"magic_link\": \"http://WJVDCqWsLfWGVmrfGtOlheUSbXWuKjO.mjxtUfgXR7\",\n    \"expires_at\": \"1954-02-21T19:15:25.244Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a00acbfd-8162-4ed0-a2ea-59c6d20501d9",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"expires_in\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "78b36c10-a9b8-4451-bd14-b85b11ab42a4",
+      "name": "Bulk Operations",
+      "description": {
+        "content": "Bulk import and export operations",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "19b50c1f-fce3-4bb0-828c-5fd996d0cb99",
+          "name": "Bulk Import Debt Accounts",
+          "request": {
+            "name": "Bulk Import Debt Accounts",
+            "description": {
+              "content": "Imports multiple debt accounts in a single request.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "bulk",
+                "debt_accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"debt_accounts\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"original_balance\": \"<float>\",\n      \"account_number\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"original_balance\": \"<float>\",\n      \"account_number\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf680ce5-1ebf-4dde-a56c-6ff0cdc512c1",
+              "name": "Bulk import initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "debt_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debt_accounts\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"original_balance\": \"<float>\",\n      \"account_number\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"original_balance\": \"<float>\",\n      \"account_number\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"status\": \"processing\",\n    \"total\": 2542,\n    \"processed\": 7105,\n    \"failed\": 3971\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6560a58d-ee2f-405e-b821-bcabaebe2ed1",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "bulk",
+                    "debt_accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"debt_accounts\": [\n    {\n      \"customer_id\": \"<string>\",\n      \"original_balance\": \"<float>\",\n      \"account_number\": \"<string>\",\n      \"description\": \"<string>\"\n    },\n    {\n      \"customer_id\": \"<string>\",\n      \"original_balance\": \"<float>\",\n      \"account_number\": \"<string>\",\n      \"description\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your organization UUID provided by Tratta",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-org-uuid",
+      "key": "org-uuid"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org-uuid}}.production.tratta.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a7764493-108c-48e2-a7ef-b45abb417366",
+    "name": "Tratta API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.\n\nContact Support:\n Name: Tratta Support",
+      "type": "text/plain"
+    }
+  }
+}
