@@ -79,7 +79,7 @@ common:
     url: https://www.tratta.io/
   - type: Documentation
     url: https://docs.tratta.io/
-  - type: SignUp
+  - type: Signup
     url: https://www.tratta.io/
 maintainers:
   - FN: Kin Lane
