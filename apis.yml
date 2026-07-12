@@ -71,6 +71,10 @@ apis:
       - Artiva
       - Snowflake
 common:
+  - type: DomainSecurity
+    url: security/tratta-domain-security.yml
+  - type: Authentication
+    url: authentication/tratta-authentication.yml
   - type: GitHubOrganization
     url: https://github.com/tratta
   - type: LinkedIn
@@ -81,6 +85,8 @@ common:
     url: https://docs.tratta.io/
   - type: Signup
     url: https://www.tratta.io/
+  - url: https://www.tratta.io/blog/rss.xml
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
