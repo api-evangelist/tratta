@@ -71,6 +71,8 @@ apis:
       - Artiva
       - Snowflake
 common:
+  - type: AgenticAccess
+    url: agentic-access/tratta-agentic-access.yml
   - type: DomainSecurity
     url: security/tratta-domain-security.yml
   - type: Authentication
