@@ -1,0 +1,119 @@
+openapi: 3.0.3
+info:
+  title: Tratta Bulk Operations API
+  description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
+  version: v1.0.0
+  contact:
+    name: Tratta Support
+    url: https://docs.tratta.io/
+  x-logo:
+    url: https://www.tratta.io/logo.png
+servers:
+- url: https://{org-uuid}.production.tratta.io/api/v1
+  description: Tratta Production Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+- url: https://{org-uuid}.sandbox.tratta.io/api/v1
+  description: Tratta Sandbox Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+security:
+- BearerAuth: []
+tags:
+- name: Bulk Operations
+  description: Bulk import and export operations
+paths:
+  /bulk/debt_accounts:
+    post:
+      operationId: bulkImportDebtAccounts
+      summary: Bulk Import Debt Accounts
+      description: Imports multiple debt accounts in a single request.
+      tags:
+      - Bulk Operations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDebtAccountRequest'
+      responses:
+        '201':
+          description: Bulk import initiated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkOperationResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    DebtAccountRequest:
+      type: object
+      required:
+      - customer_id
+      - original_balance
+      properties:
+        customer_id:
+          type: string
+        account_number:
+          type: string
+        original_balance:
+          type: number
+          format: float
+        description:
+          type: string
+    BulkDebtAccountRequest:
+      type: object
+      required:
+      - debt_accounts
+      properties:
+        debt_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DebtAccountRequest'
+    BulkOperationResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            status:
+              type: string
+              enum:
+              - pending
+              - processing
+              - completed
+              - failed
+            total:
+              type: integer
+            processed:
+              type: integer
+            failed:
+              type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token provided by Tratta after organization setup

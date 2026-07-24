@@ -1,0 +1,215 @@
+openapi: 3.0.3
+info:
+  title: Tratta Bulk Operations Payment Methods API
+  description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
+  version: v1.0.0
+  contact:
+    name: Tratta Support
+    url: https://docs.tratta.io/
+  x-logo:
+    url: https://www.tratta.io/logo.png
+servers:
+- url: https://{org-uuid}.production.tratta.io/api/v1
+  description: Tratta Production Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+- url: https://{org-uuid}.sandbox.tratta.io/api/v1
+  description: Tratta Sandbox Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+security:
+- BearerAuth: []
+tags:
+- name: Payment Methods
+  description: Payment method storage and management
+paths:
+  /payment_methods:
+    get:
+      operationId: listPaymentMethods
+      summary: List Payment Methods
+      description: Returns a list of stored payment methods.
+      tags:
+      - Payment Methods
+      parameters:
+      - $ref: '#/components/parameters/LimitParam'
+      - $ref: '#/components/parameters/PageParam'
+      responses:
+        '200':
+          description: Successful response with payment method list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodListResponse'
+    post:
+      operationId: createPaymentMethod
+      summary: Create Payment Method
+      description: Creates a standalone payment method that can be used for future charges. Supports card and bank account payment types.
+      tags:
+      - Payment Methods
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodRequest'
+      responses:
+        '201':
+          description: Payment method created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /payment_methods/{id}:
+    get:
+      operationId: getPaymentMethod
+      summary: Get Payment Method
+      description: Returns a single payment method by ID.
+      tags:
+      - Payment Methods
+      parameters:
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deletePaymentMethod
+      summary: Delete Payment Method
+      description: Deletes a stored payment method.
+      tags:
+      - Payment Methods
+      parameters:
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Payment method deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 500
+      description: Number of records per page (1-500)
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+  schemas:
+    PaymentMethodResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethodRequest:
+      type: object
+      required:
+      - type
+      - token
+      properties:
+        type:
+          type: string
+          enum:
+          - card
+          - bank_account
+        token:
+          type: string
+          description: Tokenized payment data from payment processor
+        customer_id:
+          type: string
+    PaymentMethod:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+          enum:
+          - card
+          - bank_account
+        last_four:
+          type: string
+        brand:
+          type: string
+        expiry_month:
+          type: integer
+        expiry_year:
+          type: integer
+        created_at:
+          type: string
+          format: date-time
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    PaymentMethodListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token provided by Tratta after organization setup

@@ -1,0 +1,165 @@
+openapi: 3.0.3
+info:
+  title: Tratta Bulk Operations Webhooks API
+  description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
+  version: v1.0.0
+  contact:
+    name: Tratta Support
+    url: https://docs.tratta.io/
+  x-logo:
+    url: https://www.tratta.io/logo.png
+servers:
+- url: https://{org-uuid}.production.tratta.io/api/v1
+  description: Tratta Production Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+- url: https://{org-uuid}.sandbox.tratta.io/api/v1
+  description: Tratta Sandbox Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+security:
+- BearerAuth: []
+tags:
+- name: Webhooks
+  description: Webhook configuration for event notifications
+paths:
+  /webhooks:
+    get:
+      operationId: listWebhooks
+      summary: List Webhooks
+      description: Returns all configured webhooks for the organization.
+      tags:
+      - Webhooks
+      responses:
+        '200':
+          description: Successful response with webhook list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookListResponse'
+    post:
+      operationId: createWebhook
+      summary: Create Webhook
+      description: Creates a new webhook endpoint for event notifications.
+      tags:
+      - Webhooks
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookRequest'
+      responses:
+        '201':
+          description: Webhook created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /webhooks/{id}:
+    delete:
+      operationId: deleteWebhook
+      summary: Delete Webhook
+      description: Deletes a webhook configuration.
+      tags:
+      - Webhooks
+      parameters:
+      - $ref: '#/components/parameters/IdParam'
+      responses:
+        '200':
+          description: Webhook deleted successfully
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    WebhookListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Webhook'
+    WebhookRequest:
+      type: object
+      required:
+      - url
+      - events
+      properties:
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+            enum:
+            - payment_plan.created
+            - payment_plan.updated
+            - payment_plan.completed
+            - payment_plan.cancelled
+            - charge.completed
+            - charge.failed
+            - transaction.completed
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    WebhookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token provided by Tratta after organization setup

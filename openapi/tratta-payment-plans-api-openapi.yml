@@ -1,0 +1,274 @@
+openapi: 3.0.3
+info:
+  title: Tratta Bulk Operations Payment Plans API
+  description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
+  version: v1.0.0
+  contact:
+    name: Tratta Support
+    url: https://docs.tratta.io/
+  x-logo:
+    url: https://www.tratta.io/logo.png
+servers:
+- url: https://{org-uuid}.production.tratta.io/api/v1
+  description: Tratta Production Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+- url: https://{org-uuid}.sandbox.tratta.io/api/v1
+  description: Tratta Sandbox Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+security:
+- BearerAuth: []
+tags:
+- name: Payment Plans
+  description: Payment plan creation and management
+paths:
+  /payment_plans:
+    get:
+      operationId: listPaymentPlans
+      summary: List Payment Plans
+      description: Returns a paginated list of payment plans.
+      tags:
+      - Payment Plans
+      parameters:
+      - $ref: '#/components/parameters/LimitParam'
+      - $ref: '#/components/parameters/PageParam'
+      - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response with payment plan list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanListResponse'
+    post:
+      operationId: createPaymentPlan
+      summary: Create Payment Plan
+      description: Creates a new payment plan for a debt account.
+      tags:
+      - Payment Plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPlanRequest'
+      responses:
+        '201':
+          description: Payment plan created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /payment_plans/{id}:
+    get:
+      operationId: getPaymentPlan
+      summary: Get Payment Plan
+      description: Returns a single payment plan by ID.
+      tags:
+      - Payment Plans
+      parameters:
+      - $ref: '#/components/parameters/IdParam'
+      - $ref: '#/components/parameters/IncludeParam'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updatePaymentPlan
+      summary: Update Payment Plan
+      description: Updates an existing payment plan.
+      tags:
+      - Payment Plans
+      parameters:
+      - $ref: '#/components/parameters/IdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentPlanRequest'
+      responses:
+        '200':
+          description: Payment plan updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentPlanResponse'
+components:
+  schemas:
+    PaymentPlanListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentPlan'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    PaymentPlanRequest:
+      type: object
+      required:
+      - debt_account_id
+      - total_amount
+      - installment_amount
+      - frequency
+      properties:
+        debt_account_id:
+          type: string
+        total_amount:
+          type: number
+          format: float
+        installment_amount:
+          type: number
+          format: float
+        frequency:
+          type: string
+          enum:
+          - weekly
+          - biweekly
+          - monthly
+        start_date:
+          type: string
+          format: date
+        payment_method_id:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    PaymentPlan:
+      type: object
+      properties:
+        id:
+          type: string
+        debt_account_id:
+          type: string
+        total_amount:
+          type: number
+          format: float
+        installment_amount:
+          type: number
+          format: float
+        frequency:
+          type: string
+          enum:
+          - weekly
+          - biweekly
+          - monthly
+        status:
+          type: string
+          enum:
+          - active
+          - paused
+          - completed
+          - cancelled
+        payment_source:
+          type: string
+        start_date:
+          type: string
+          format: date
+        next_payment_date:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    PaymentPlanResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentPlan'
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+        last:
+          type: string
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 500
+      description: Number of records per page (1-500)
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token provided by Tratta after organization setup

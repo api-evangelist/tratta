@@ -1,0 +1,101 @@
+openapi: 3.0.3
+info:
+  title: Tratta Bulk Operations Customer Sessions API
+  description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
+  version: v1.0.0
+  contact:
+    name: Tratta Support
+    url: https://docs.tratta.io/
+  x-logo:
+    url: https://www.tratta.io/logo.png
+servers:
+- url: https://{org-uuid}.production.tratta.io/api/v1
+  description: Tratta Production Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+- url: https://{org-uuid}.sandbox.tratta.io/api/v1
+  description: Tratta Sandbox Server
+  variables:
+    org-uuid:
+      description: Your organization UUID provided by Tratta
+      default: your-org-uuid
+security:
+- BearerAuth: []
+tags:
+- name: Customer Sessions
+  description: Secure customer session management
+paths:
+  /customer_sessions:
+    post:
+      operationId: createCustomerSession
+      summary: Create Customer Session
+      description: Creates a secure customer session and returns a magic link for instant portal access without login credentials.
+      tags:
+      - Customer Sessions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerSessionRequest'
+      responses:
+        '201':
+          description: Customer session created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerSessionResponse'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    CustomerSessionRequest:
+      type: object
+      required:
+      - customer_id
+      properties:
+        customer_id:
+          type: string
+        redirect_url:
+          type: string
+          format: uri
+        expires_in:
+          type: integer
+          description: Session expiry in seconds
+    CustomerSessionResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+            magic_link:
+              type: string
+              format: uri
+            expires_at:
+              type: string
+              format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+  responses:
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token provided by Tratta after organization setup
