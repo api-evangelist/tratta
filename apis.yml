@@ -5,9 +5,22 @@ description: >-
   payment plans, billing, customer session management, and collections workflows into existing tech stacks. The platform
   supports OAuth 2.0 / bearer token authentication and offers sandbox and production environments.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/tratta.png
 tags:
   - Billing
   - Collections
@@ -19,57 +32,246 @@ modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/tratta/refs/heads/main/apis.yml
 specificationVersion: '0.19'
 apis:
-  - aid: tratta:tratta
-    name: Tratta API
-    description: >-
-      REST API for Tratta's debt collection and payment platform. Enables programmatic management of debt accounts,
-      payment plans, transactions, charges, customers, and webhooks for collections workflows.
-    humanURL: https://docs.tratta.io/
-    baseURL: https://api.tratta.io
-    tags:
-      - Billing
-      - Collections
-      - Payments
-      - Debt Collection
-      - Fintech
-    properties:
-      - type: Documentation
-        url: https://docs.tratta.io/api.html
-      - type: OpenAPI
-        url: openapi/tratta-openapi.yml
-      - type: JSONSchema
-        url: json-schema/tratta-payment-plan-schema.json
-      - type: JSONSchema
-        url: json-schema/tratta-debt-account-schema.json
-      - type: JSONStructure
-        url: json-structure/tratta-payment-plan-structure.json
-      - type: JSONLD
-        url: json-ld/tratta-context.jsonld
-      - type: SpectralRules
-        url: rules/tratta-rules.yml
-      - type: Vocabulary
-        url: vocabulary/tratta-vocabulary.yml
-    x-resources:
-      - Customers
-      - Debt Accounts
-      - Payment Plans
-      - Payment Methods
-      - Charges
-      - Transactions
-      - Webhooks
-      - Customer Sessions
-      - Bulk Operations
-      - Tickets
-    x-authentication:
-      type: Bearer Token
-      description: Bearer token in Authorization header; OAuth 2.0 / API Key security
-    x-rate-limits:
-      default: 300 requests per minute
-    x-integrations:
-      - StratusPay
-      - Cogent
-      - Artiva
-      - Snowflake
+- aid: tratta:tratta-bulk-operations-api
+  name: Tratta Bulk Operations API
+  description: Bulk import and export operations
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Bulk Operations
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-bulk-operations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-charges-api
+  name: Tratta Charges API
+  description: Charge processing and management
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Charges
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-charges-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-customer-sessions-api
+  name: Tratta Customer Sessions API
+  description: Secure customer session management
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Customer Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-customer-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-customers-api
+  name: Tratta Customers API
+  description: Customer account management
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Customers
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-customers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-debt-accounts-api
+  name: Tratta Debt Accounts API
+  description: Debt account operations and management
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Debt Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-debt-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-payment-methods-api
+  name: Tratta Payment Methods API
+  description: Payment method storage and management
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Payment Methods
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-payment-methods-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-payment-plans-api
+  name: Tratta Payment Plans API
+  description: Payment plan creation and management
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Payment Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-payment-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-tickets-api
+  name: Tratta Tickets API
+  description: Support ticket management
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Tickets
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-tickets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-transactions-api
+  name: Tratta Transactions API
+  description: Transaction history and reporting
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
+- aid: tratta:tratta-webhooks-api
+  name: Tratta Webhooks API
+  description: Webhook configuration for event notifications
+  humanURL: https://docs.tratta.io/
+  baseURL: https://api.tratta.io
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/tratta-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.tratta.io/api.html
+  - type: JSONSchema
+    url: json-schema/tratta-payment-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/tratta-debt-account-schema.json
+  - type: JSONStructure
+    url: json-structure/tratta-payment-plan-structure.json
+  - type: JSONLD
+    url: json-ld/tratta-context.jsonld
+  - type: SpectralRules
+    url: rules/tratta-rules.yml
+  - type: Vocabulary
+    url: vocabulary/tratta-vocabulary.yml
 common:
   - type: AgenticAccess
     url: agentic-access/tratta-agentic-access.yml
