@@ -1,0 +1,32 @@
+{
+  "provider": "tratta",
+  "sources": [
+    "tratta-bulk-operations-api-openapi.yml",
+    "tratta-charges-api-openapi.yml",
+    "tratta-customer-sessions-api-openapi.yml",
+    "tratta-customers-api-openapi.yml",
+    "tratta-debt-accounts-api-openapi.yml",
+    "tratta-payment-methods-api-openapi.yml",
+    "tratta-payment-plans-api-openapi.yml",
+    "tratta-tickets-api-openapi.yml",
+    "tratta-transactions-api-openapi.yml",
+    "tratta-webhooks-api-openapi.yml"
+  ],
+  "outputs": [
+    "tratta-bulk-operations-api-openapi.yml",
+    "tratta-charges-api-openapi.yml",
+    "tratta-customer-sessions-api-openapi.yml",
+    "tratta-customers-api-openapi.yml",
+    "tratta-debt-accounts-api-openapi.yml",
+    "tratta-payment-methods-api-openapi.yml",
+    "tratta-payment-plans-api-openapi.yml",
+    "tratta-tickets-api-openapi.yml",
+    "tratta-transactions-api-openapi.yml",
+    "tratta-webhooks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
