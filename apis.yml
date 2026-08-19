@@ -30,7 +30,7 @@ tags:
 created: '2025-02-24'
 modified: '2026-05-19'
 url: https://raw.githubusercontent.com/api-evangelist/tratta/refs/heads/main/apis.yml
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: tratta:tratta-bulk-operations-api
   name: Tratta Bulk Operations API
