@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tratta Bulk Operations Customer Sessions API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Customer Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Customer Session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/customer_sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a secure customer session and returns a magic link for instant portal access without login credentials."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

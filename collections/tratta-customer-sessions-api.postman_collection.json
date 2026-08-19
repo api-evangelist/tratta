@@ -1,0 +1,221 @@
+{
+  "item": [
+    {
+      "id": "0d91b59d-3671-4347-b1af-aa5b3a42eda3",
+      "name": "Customer Sessions",
+      "description": {
+        "content": "Secure customer session management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "51aa1613-9687-498e-822d-e33a1efc8a9e",
+          "name": "Create Customer Session",
+          "request": {
+            "name": "Create Customer Session",
+            "description": {
+              "content": "Creates a secure customer session and returns a magic link for instant portal access without login credentials.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "customer_sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Your organization UUID provided by Tratta",
+                  "type": "any",
+                  "value": "{{org-uuid}}",
+                  "key": "org-uuid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"expires_in\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c1e7231c-9bad-4f5c-bbd4-07fcee97f056",
+              "name": "Customer session created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"expires_in\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": {\n    \"id\": \"string\",\n    \"magic_link\": \"https://RhSZrtbeSNoqinCGtBEGN.elkqNsNEK7,cEXb3ryopgCqZb2sQbyNjRmLTCNq5Ig.MOOC7+.YMmu1mYg9j6K8P73+VzAbeTHYRUMUa.F\",\n    \"expires_at\": \"2010-08-28T22:32:08.064Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b87fe13-6edc-4002-8791-6d07c15c8a97",
+              "name": "Unprocessable entity - missing parameters or invalid data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "customer_sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Your organization UUID provided by Tratta",
+                      "type": "any",
+                      "value": "{{org-uuid}}",
+                      "key": "org-uuid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"customer_id\": \"<string>\",\n  \"redirect_url\": \"<uri>\",\n  \"expires_in\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\",\n  \"errorCode\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Your organization UUID provided by Tratta",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "your-org-uuid",
+      "key": "org-uuid"
+    },
+    {
+      "type": "string",
+      "value": "https://{{org-uuid}}.production.tratta.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a41bcb40-f186-4bcd-a9f5-5c3ff4f05c87",
+    "name": "Tratta Bulk Operations Customer Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.\n\nContact Support:\n Name: Tratta Support",
+      "type": "text/plain"
+    }
+  }
+}

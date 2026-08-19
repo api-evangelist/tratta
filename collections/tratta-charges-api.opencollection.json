@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tratta Bulk Operations Charges API",
+    "version": "v1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Charges",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Charges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/charges",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of records per page (1-500)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "include",
+                "value": "",
+                "type": "query",
+                "description": "Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of charges."
+        },
+        {
+          "info": {
+            "name": "Create Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/charges",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new charge against a payment method or debt account."
+        },
+        {
+          "info": {
+            "name": "Get Charge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{org-uuid}.production.tratta.io/api/v1/charges/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Resource unique identifier"
+              }
+            ]
+          },
+          "docs": "Returns a single charge by ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
