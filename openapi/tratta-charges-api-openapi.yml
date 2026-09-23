@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tratta Bulk Operations Charges API
+  title: Tratta Charges API
   description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
   version: v1.0.0
   contact:
@@ -85,7 +85,45 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 500
+      description: Number of records per page (1-500)
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
   schemas:
+    ChargeResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Charge'
     Charge:
       type: object
       properties:
@@ -108,20 +146,6 @@ components:
         created_at:
           type: string
           format: date-time
-    ChargeResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Charge'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
     ChargeListResponse:
       type: object
       properties:
@@ -133,19 +157,6 @@ components:
           $ref: '#/components/schemas/PaginationMeta'
         links:
           $ref: '#/components/schemas/PaginationLinks'
-    PaginationLinks:
-      type: object
-      properties:
-        first:
-          type: string
-        prev:
-          type: string
-          nullable: true
-        next:
-          type: string
-          nullable: true
-        last:
-          type: string
     PaginationMeta:
       type: object
       properties:
@@ -171,48 +182,39 @@ components:
           type: string
         description:
           type: string
-  parameters:
-    PageParam:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number for pagination
-    LimitParam:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 1
-        maximum: 500
-      description: Number of records per page (1-500)
-    IncludeParam:
-      name: include
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
   responses:
-    NotFound:
-      description: Resource not found
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

@@ -1,16 +1,7 @@
 {
   "provider": "tratta",
   "sources": [
-    "tratta-bulk-operations-api-openapi.yml",
-    "tratta-charges-api-openapi.yml",
-    "tratta-customer-sessions-api-openapi.yml",
-    "tratta-customers-api-openapi.yml",
-    "tratta-debt-accounts-api-openapi.yml",
-    "tratta-payment-methods-api-openapi.yml",
-    "tratta-payment-plans-api-openapi.yml",
-    "tratta-tickets-api-openapi.yml",
-    "tratta-transactions-api-openapi.yml",
-    "tratta-webhooks-api-openapi.yml"
+    "_original/tratta-openapi.yml"
   ],
   "outputs": [
     "tratta-bulk-operations-api-openapi.yml",
@@ -27,6 +18,21 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "tratta-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "tratta-bulk-operations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-charges-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-customer-sessions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-debt-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-payment-methods-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-payment-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-tickets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "tratta-webhooks-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

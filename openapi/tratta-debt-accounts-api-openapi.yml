@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tratta Bulk Operations Debt Accounts API
+  title: Tratta Debt Accounts API
   description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
   version: v1.0.0
   contact:
@@ -89,43 +89,11 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    DebtAccountRequest:
-      type: object
-      required:
-      - customer_id
-      - original_balance
-      properties:
-        customer_id:
-          type: string
-        account_number:
-          type: string
-        original_balance:
-          type: number
-          format: float
-        description:
-          type: string
-    ErrorResponse:
+    DebtAccountResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
-    PaginationLinks:
-      type: object
-      properties:
-        first:
-          type: string
-        prev:
-          type: string
-          nullable: true
-        next:
-          type: string
-          nullable: true
-        last:
-          type: string
+        data:
+          $ref: '#/components/schemas/DebtAccount'
     DebtAccount:
       type: object
       properties:
@@ -150,22 +118,6 @@ components:
         created_at:
           type: string
           format: date-time
-    DebtAccountResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/DebtAccount'
-    DebtAccountListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/DebtAccount'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
     PaginationMeta:
       type: object
       properties:
@@ -177,15 +129,57 @@ components:
           type: integer
         total_pages:
           type: integer
+    DebtAccountListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/DebtAccount'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type: string
+    DebtAccountRequest:
+      type: object
+      required:
+      - customer_id
+      - original_balance
+      properties:
+        customer_id:
+          type: string
+        account_number:
+          type: string
+        original_balance:
+          type: number
+          format: float
+        description:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
   parameters:
-    PageParam:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number for pagination
     LimitParam:
       name: limit
       in: query
@@ -196,13 +190,14 @@ components:
         minimum: 1
         maximum: 500
       description: Number of records per page (1-500)
-    IncludeParam:
-      name: include
+    PageParam:
+      name: page
       in: query
       required: false
       schema:
-        type: string
-      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
+        type: integer
+        default: 1
+      description: Page number for pagination
     IdParam:
       name: id
       in: path
@@ -210,9 +205,16 @@ components:
       schema:
         type: string
       description: Resource unique identifier
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
   responses:
-    NotFound:
-      description: Resource not found
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:
@@ -223,8 +225,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

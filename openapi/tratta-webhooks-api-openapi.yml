@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tratta Bulk Operations Webhooks API
+  title: Tratta Webhooks API
   description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
   version: v1.0.0
   contact:
@@ -102,6 +102,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Webhook'
+    WebhookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
     WebhookRequest:
       type: object
       required:
@@ -132,20 +137,15 @@ components:
         errorCode:
           type: string
           description: Optional error code
-    WebhookResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Webhook'
   responses:
-    NotFound:
-      description: Resource not found
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:

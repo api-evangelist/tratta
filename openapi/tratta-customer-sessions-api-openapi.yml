@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Tratta Bulk Operations Customer Sessions API
+  title: Tratta Customer Sessions API
   description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
   version: v1.0.0
   contact:
@@ -51,19 +51,6 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    CustomerSessionRequest:
-      type: object
-      required:
-      - customer_id
-      properties:
-        customer_id:
-          type: string
-        redirect_url:
-          type: string
-          format: uri
-        expires_in:
-          type: integer
-          description: Session expiry in seconds
     CustomerSessionResponse:
       type: object
       properties:
@@ -78,6 +65,19 @@ components:
             expires_at:
               type: string
               format: date-time
+    CustomerSessionRequest:
+      type: object
+      required:
+      - customer_id
+      properties:
+        customer_id:
+          type: string
+        redirect_url:
+          type: string
+          format: uri
+        expires_in:
+          type: integer
+          description: Session expiry in seconds
     ErrorResponse:
       type: object
       properties:

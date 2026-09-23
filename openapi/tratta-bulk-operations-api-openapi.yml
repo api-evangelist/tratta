@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Tratta Bulk Operations API
   description: The Tratta REST API enables programmatic integration with Tratta's debt collection and payment experience platform. Manage debt accounts, payment plans, transactions, customers, charges, and webhooks for collections workflows. Supports both sandbox and production environments.
@@ -51,30 +51,6 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    DebtAccountRequest:
-      type: object
-      required:
-      - customer_id
-      - original_balance
-      properties:
-        customer_id:
-          type: string
-        account_number:
-          type: string
-        original_balance:
-          type: number
-          format: float
-        description:
-          type: string
-    BulkDebtAccountRequest:
-      type: object
-      required:
-      - debt_accounts
-      properties:
-        debt_accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/DebtAccountRequest'
     BulkOperationResponse:
       type: object
       properties:
@@ -96,6 +72,30 @@ components:
               type: integer
             failed:
               type: integer
+    BulkDebtAccountRequest:
+      type: object
+      required:
+      - debt_accounts
+      properties:
+        debt_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DebtAccountRequest'
+    DebtAccountRequest:
+      type: object
+      required:
+      - customer_id
+      - original_balance
+      properties:
+        customer_id:
+          type: string
+        account_number:
+          type: string
+        original_balance:
+          type: number
+          format: float
+        description:
+          type: string
     ErrorResponse:
       type: object
       properties:
