@@ -89,16 +89,12 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    DebtAccountResponse:
+    DebtAccountRequest:
       type: object
+      required:
+      - customer_id
+      - original_balance
       properties:
-        data:
-          $ref: '#/components/schemas/DebtAccount'
-    DebtAccount:
-      type: object
-      properties:
-        id:
-          type: string
         customer_id:
           type: string
         account_number:
@@ -106,29 +102,8 @@ components:
         original_balance:
           type: number
           format: float
-        current_balance:
-          type: number
-          format: float
-        status:
+        description:
           type: string
-          enum:
-          - active
-          - resolved
-          - closed
-        created_at:
-          type: string
-          format: date-time
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
     DebtAccountListResponse:
       type: object
       properties:
@@ -155,12 +130,27 @@ components:
           - 'null'
         last:
           type: string
-    DebtAccountRequest:
+    DebtAccountResponse:
       type: object
-      required:
-      - customer_id
-      - original_balance
       properties:
+        data:
+          $ref: '#/components/schemas/DebtAccount'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    DebtAccount:
+      type: object
+      properties:
+        id:
+          type: string
         customer_id:
           type: string
         account_number:
@@ -168,8 +158,18 @@ components:
         original_balance:
           type: number
           format: float
-        description:
+        current_balance:
+          type: number
+          format: float
+        status:
           type: string
+          enum:
+          - active
+          - resolved
+          - closed
+        created_at:
+          type: string
+          format: date-time
     ErrorResponse:
       type: object
       properties:
@@ -179,48 +179,15 @@ components:
         errorCode:
           type: string
           description: Optional error code
-  parameters:
-    LimitParam:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 1
-        maximum: 500
-      description: Number of records per page (1-500)
-    PageParam:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number for pagination
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
-    IncludeParam:
-      name: include
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
   responses:
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    Unauthorized:
+      description: Unauthorized - invalid or missing bearer token
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - invalid or missing bearer token
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:
@@ -231,6 +198,39 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 500
+      description: Number of records per page (1-500)
   securitySchemes:
     BearerAuth:
       type: http

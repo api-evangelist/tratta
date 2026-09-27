@@ -225,6 +225,8 @@ apis:
   humanURL: https://docs.tratta.io/
   baseURL: https://api.tratta.io
   tags:
+  - Ticketing
+  tags_raw:
   - Tickets
   properties:
   - type: OpenAPI
