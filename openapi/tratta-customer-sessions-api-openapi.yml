@@ -51,19 +51,15 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    CustomerSessionRequest:
+    ErrorResponse:
       type: object
-      required:
-      - customer_id
       properties:
-        customer_id:
+        error:
           type: string
-        redirect_url:
+          description: Error message
+        errorCode:
           type: string
-          format: uri
-        expires_in:
-          type: integer
-          description: Session expiry in seconds
+          description: Optional error code
     CustomerSessionResponse:
       type: object
       properties:
@@ -78,15 +74,19 @@ components:
             expires_at:
               type: string
               format: date-time
-    ErrorResponse:
+    CustomerSessionRequest:
       type: object
+      required:
+      - customer_id
       properties:
-        error:
+        customer_id:
           type: string
-          description: Error message
-        errorCode:
+        redirect_url:
           type: string
-          description: Optional error code
+          format: uri
+        expires_in:
+          type: integer
+          description: Session expiry in seconds
   responses:
     UnprocessableEntity:
       description: Unprocessable entity - missing parameters or invalid data

@@ -102,6 +102,25 @@ components:
           type: integer
         total_pages:
           type: integer
+    TicketRequest:
+      type: object
+      required:
+      - subject
+      - description
+      properties:
+        subject:
+          type: string
+        description:
+          type: string
+        customer_id:
+          type: string
+        debt_account_id:
+          type: string
+    TicketResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Ticket'
     Ticket:
       type: object
       properties:
@@ -121,25 +140,6 @@ components:
         created_at:
           type: string
           format: date-time
-    TicketResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Ticket'
-    TicketRequest:
-      type: object
-      required:
-      - subject
-      - description
-      properties:
-        subject:
-          type: string
-        description:
-          type: string
-        customer_id:
-          type: string
-        debt_account_id:
-          type: string
   parameters:
     PageParam:
       name: page

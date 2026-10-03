@@ -98,31 +98,15 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    PaymentMethodRequest:
-      type: object
-      required:
-      - type
-      - token
-      properties:
-        type:
-          type: string
-          enum:
-          - card
-          - bank_account
-        token:
-          type: string
-          description: Tokenized payment data from payment processor
-        customer_id:
-          type: string
-    PaymentMethodListResponse:
+    ErrorResponse:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethod'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
     PaymentMethod:
       type: object
       properties:
@@ -144,6 +128,11 @@ components:
         created_at:
           type: string
           format: date-time
+    PaymentMethodResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentMethod'
     PaginationMeta:
       type: object
       properties:
@@ -155,28 +144,32 @@ components:
           type: integer
         total_pages:
           type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
-    PaymentMethodResponse:
+    PaymentMethodListResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/PaymentMethod'
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+    PaymentMethodRequest:
+      type: object
+      required:
+      - type
+      - token
+      properties:
+        type:
+          type: string
+          enum:
+          - card
+          - bank_account
+        token:
+          type: string
+          description: Tokenized payment data from payment processor
+        customer_id:
+          type: string
   parameters:
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
     PageParam:
       name: page
       in: query
@@ -195,6 +188,13 @@ components:
         minimum: 1
         maximum: 500
       description: Number of records per page (1-500)
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
   responses:
     UnprocessableEntity:
       description: Unprocessable entity - missing parameters or invalid data

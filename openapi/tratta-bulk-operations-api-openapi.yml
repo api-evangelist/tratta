@@ -51,21 +51,24 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    DebtAccountRequest:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    BulkDebtAccountRequest:
       type: object
       required:
-      - customer_id
-      - original_balance
+      - debt_accounts
       properties:
-        customer_id:
-          type: string
-        account_number:
-          type: string
-        original_balance:
-          type: number
-          format: float
-        description:
-          type: string
+        debt_accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/DebtAccountRequest'
     BulkOperationResponse:
       type: object
       properties:
@@ -87,24 +90,21 @@ components:
               type: integer
             failed:
               type: integer
-    BulkDebtAccountRequest:
+    DebtAccountRequest:
       type: object
       required:
-      - debt_accounts
+      - customer_id
+      - original_balance
       properties:
-        debt_accounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/DebtAccountRequest'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
+        customer_id:
           type: string
-          description: Error message
-        errorCode:
+        account_number:
           type: string
-          description: Optional error code
+        original_balance:
+          type: number
+          format: float
+        description:
+          type: string
   responses:
     UnprocessableEntity:
       description: Unprocessable entity - missing parameters or invalid data

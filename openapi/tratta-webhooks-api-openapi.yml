@@ -78,6 +78,37 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    WebhookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
     WebhookListResponse:
       type: object
       properties:
@@ -106,45 +137,6 @@ components:
             - charge.completed
             - charge.failed
             - transaction.completed
-    Webhook:
-      type: object
-      properties:
-        id:
-          type: string
-        url:
-          type: string
-          format: uri
-        events:
-          type: array
-          items:
-            type: string
-        active:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
-    WebhookResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Webhook'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
-  parameters:
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
   responses:
     UnprocessableEntity:
       description: Unprocessable entity - missing parameters or invalid data
@@ -158,6 +150,14 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
   securitySchemes:
     BearerAuth:
       type: http
