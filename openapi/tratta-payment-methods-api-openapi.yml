@@ -98,15 +98,15 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ErrorResponse:
+    PaymentMethodListResponse:
       type: object
       properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethod'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
     PaymentMethod:
       type: object
       properties:
@@ -128,31 +128,6 @@ components:
         created_at:
           type: string
           format: date-time
-    PaymentMethodResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PaymentMethod'
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    PaymentMethodListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethod'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
     PaymentMethodRequest:
       type: object
       required:
@@ -169,6 +144,31 @@ components:
           description: Tokenized payment data from payment processor
         customer_id:
           type: string
+    PaymentMethodResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentMethod'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
   parameters:
     PageParam:
       name: page
@@ -196,14 +196,14 @@ components:
         type: string
       description: Resource unique identifier
   responses:
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:

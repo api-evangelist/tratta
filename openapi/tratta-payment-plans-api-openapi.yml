@@ -108,26 +108,6 @@ paths:
                 $ref: '#/components/schemas/PaymentPlanResponse'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
-    PaymentPlanListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentPlan'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
     PaginationLinks:
       type: object
       properties:
@@ -143,6 +123,69 @@ components:
           - 'null'
         last:
           type: string
+    PaymentPlanRequest:
+      type: object
+      required:
+      - debt_account_id
+      - total_amount
+      - installment_amount
+      - frequency
+      properties:
+        debt_account_id:
+          type: string
+        total_amount:
+          type: number
+          format: float
+        installment_amount:
+          type: number
+          format: float
+        frequency:
+          type: string
+          enum:
+          - weekly
+          - biweekly
+          - monthly
+        start_date:
+          type: string
+          format: date
+        payment_method_id:
+          type: string
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    PaymentPlanListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentPlan'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    PaymentPlanResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentPlan'
     PaymentPlan:
       type: object
       properties:
@@ -180,49 +223,6 @@ components:
         created_at:
           type: string
           format: date-time
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    PaymentPlanResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PaymentPlan'
-    PaymentPlanRequest:
-      type: object
-      required:
-      - debt_account_id
-      - total_amount
-      - installment_amount
-      - frequency
-      properties:
-        debt_account_id:
-          type: string
-        total_amount:
-          type: number
-          format: float
-        installment_amount:
-          type: number
-          format: float
-        frequency:
-          type: string
-          enum:
-          - weekly
-          - biweekly
-          - monthly
-        start_date:
-          type: string
-          format: date
-        payment_method_id:
-          type: string
   parameters:
     PageParam:
       name: page
@@ -232,6 +232,13 @@ components:
         type: integer
         default: 1
       description: Page number for pagination
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
     LimitParam:
       name: limit
       in: query
@@ -249,22 +256,15 @@ components:
       schema:
         type: string
       description: Resource unique identifier
-    IncludeParam:
-      name: include
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
   responses:
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:

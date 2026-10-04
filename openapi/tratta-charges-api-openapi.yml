@@ -86,15 +86,35 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ErrorResponse:
+    PaginationLinks:
       type: object
       properties:
-        error:
+        first:
           type: string
-          description: Error message
-        errorCode:
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
           type: string
-          description: Optional error code
+    ChargeRequest:
+      type: object
+      required:
+      - amount
+      properties:
+        amount:
+          type: number
+          format: float
+        payment_method_id:
+          type: string
+        debt_account_id:
+          type: string
+        description:
+          type: string
     Charge:
       type: object
       properties:
@@ -117,46 +137,15 @@ components:
         created_at:
           type: string
           format: date-time
-    PaginationLinks:
+    ErrorResponse:
       type: object
       properties:
-        first:
+        error:
           type: string
-        prev:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-        last:
+          description: Error message
+        errorCode:
           type: string
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    ChargeRequest:
-      type: object
-      required:
-      - amount
-      properties:
-        amount:
-          type: number
-          format: float
-        payment_method_id:
-          type: string
-        debt_account_id:
-          type: string
-        description:
-          type: string
+          description: Optional error code
     ChargeListResponse:
       type: object
       properties:
@@ -173,6 +162,17 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/Charge'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
   parameters:
     PageParam:
       name: page
@@ -182,6 +182,13 @@ components:
         type: integer
         default: 1
       description: Page number for pagination
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
     LimitParam:
       name: limit
       in: query
@@ -199,22 +206,15 @@ components:
       schema:
         type: string
       description: Resource unique identifier
-    IncludeParam:
-      name: include
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
   responses:
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    NotFound:
+      description: Resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Resource not found
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:

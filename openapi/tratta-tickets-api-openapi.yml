@@ -80,17 +80,6 @@ components:
           - 'null'
         last:
           type: string
-    TicketListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ticket'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
     PaginationMeta:
       type: object
       properties:
@@ -102,6 +91,11 @@ components:
           type: integer
         total_pages:
           type: integer
+    TicketResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Ticket'
     TicketRequest:
       type: object
       required:
@@ -116,11 +110,17 @@ components:
           type: string
         debt_account_id:
           type: string
-    TicketResponse:
+    TicketListResponse:
       type: object
       properties:
         data:
-          $ref: '#/components/schemas/Ticket'
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticket'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
     Ticket:
       type: object
       properties:
