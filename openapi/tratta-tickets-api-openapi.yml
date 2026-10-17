@@ -65,62 +65,6 @@ paths:
                 $ref: '#/components/schemas/TicketResponse'
 components:
   schemas:
-    PaginationLinks:
-      type: object
-      properties:
-        first:
-          type: string
-        prev:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-        last:
-          type: string
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    TicketResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Ticket'
-    TicketRequest:
-      type: object
-      required:
-      - subject
-      - description
-      properties:
-        subject:
-          type: string
-        description:
-          type: string
-        customer_id:
-          type: string
-        debt_account_id:
-          type: string
-    TicketListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ticket'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
     Ticket:
       type: object
       properties:
@@ -140,6 +84,62 @@ components:
         created_at:
           type: string
           format: date-time
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    TicketListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ticket'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    TicketResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Ticket'
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type: string
+    TicketRequest:
+      type: object
+      required:
+      - subject
+      - description
+      properties:
+        subject:
+          type: string
+        description:
+          type: string
+        customer_id:
+          type: string
+        debt_account_id:
+          type: string
   parameters:
     PageParam:
       name: page

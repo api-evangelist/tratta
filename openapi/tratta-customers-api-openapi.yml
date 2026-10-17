@@ -115,96 +115,15 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
-  schemas:
-    PaginationLinks:
-      type: object
-      properties:
-        first:
-          type: string
-        prev:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-        last:
-          type: string
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
-    CustomerListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-    Customer:
-      type: object
-      properties:
-        id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-    CustomerRequest:
-      type: object
-      required:
-      - first_name
-      - last_name
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-    CustomerResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Customer'
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
   responses:
-    UnprocessableEntity:
-      description: Unprocessable entity - missing parameters or invalid data
+    Unauthorized:
+      description: Unauthorized - invalid or missing bearer token
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request - valid data but request failed
       content:
         application/json:
           schema:
@@ -215,14 +134,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized - invalid or missing bearer token
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request - valid data but request failed
+    UnprocessableEntity:
+      description: Unprocessable entity - missing parameters or invalid data
       content:
         application/json:
           schema:
@@ -243,6 +156,13 @@ components:
       schema:
         type: string
       description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
     LimitParam:
       name: limit
       in: query
@@ -253,13 +173,93 @@ components:
         minimum: 1
         maximum: 500
       description: Number of records per page (1-500)
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
+  schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
+    CustomerResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Customer'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
+    CustomerListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    CustomerRequest:
+      type: object
+      required:
+      - first_name
+      - last_name
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+    Customer:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

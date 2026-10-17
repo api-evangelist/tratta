@@ -78,6 +78,28 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    Webhook:
+      type: object
+      properties:
+        id:
+          type: string
+        url:
+          type: string
+          format: uri
+        events:
+          type: array
+          items:
+            type: string
+        active:
+          type: boolean
+        created_at:
+          type: string
+          format: date-time
+    WebhookResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Webhook'
     WebhookRequest:
       type: object
       required:
@@ -99,11 +121,6 @@ components:
             - charge.completed
             - charge.failed
             - transaction.completed
-    WebhookResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Webhook'
     ErrorResponse:
       type: object
       properties:
@@ -113,23 +130,6 @@ components:
         errorCode:
           type: string
           description: Optional error code
-    Webhook:
-      type: object
-      properties:
-        id:
-          type: string
-        url:
-          type: string
-          format: uri
-        events:
-          type: array
-          items:
-            type: string
-        active:
-          type: boolean
-        created_at:
-          type: string
-          format: date-time
     WebhookListResponse:
       type: object
       properties:
@@ -137,6 +137,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Webhook'
+  parameters:
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
   responses:
     NotFound:
       description: Resource not found
@@ -150,14 +158,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
   securitySchemes:
     BearerAuth:
       type: http

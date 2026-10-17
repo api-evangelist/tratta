@@ -108,21 +108,22 @@ paths:
                 $ref: '#/components/schemas/PaymentPlanResponse'
 components:
   schemas:
-    PaginationLinks:
+    PaymentPlanResponse:
       type: object
       properties:
-        first:
-          type: string
-        prev:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-        last:
-          type: string
+        data:
+          $ref: '#/components/schemas/PaymentPlan'
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     PaymentPlanRequest:
       type: object
       required:
@@ -150,42 +151,6 @@ components:
           format: date
         payment_method_id:
           type: string
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-    PaymentPlanListResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentPlan'
-        meta:
-          $ref: '#/components/schemas/PaginationMeta'
-        links:
-          $ref: '#/components/schemas/PaginationLinks'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          type: string
-          description: Error message
-        errorCode:
-          type: string
-          description: Optional error code
-    PaymentPlanResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PaymentPlan'
     PaymentPlan:
       type: object
       properties:
@@ -223,6 +188,41 @@ components:
         created_at:
           type: string
           format: date-time
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type: string
+    PaymentPlanListResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentPlan'
+        meta:
+          $ref: '#/components/schemas/PaginationMeta'
+        links:
+          $ref: '#/components/schemas/PaginationLinks'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        errorCode:
+          type: string
+          description: Optional error code
   parameters:
     PageParam:
       name: page
@@ -239,6 +239,13 @@ components:
       schema:
         type: string
       description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
     LimitParam:
       name: limit
       in: query
@@ -249,13 +256,6 @@ components:
         minimum: 1
         maximum: 500
       description: Number of records per page (1-500)
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
   responses:
     NotFound:
       description: Resource not found

@@ -78,27 +78,51 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination
+    IncludeParam:
+      name: include
+      in: query
+      required: false
+      schema:
+        type: string
+      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 500
+      description: Number of records per page (1-500)
   schemas:
-    PaginationLinks:
+    PaginationMeta:
       type: object
       properties:
-        first:
-          type: string
-        prev:
-          type:
-          - string
-          - 'null'
-        next:
-          type:
-          - string
-          - 'null'
-        last:
-          type: string
-    TransactionResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Transaction'
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     Transaction:
       type: object
       properties:
@@ -128,6 +152,11 @@ components:
         created_at:
           type: string
           format: date-time
+    TransactionResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Transaction'
     TransactionListResponse:
       type: object
       properties:
@@ -139,6 +168,21 @@ components:
           $ref: '#/components/schemas/PaginationMeta'
         links:
           $ref: '#/components/schemas/PaginationLinks'
+    PaginationLinks:
+      type: object
+      properties:
+        first:
+          type: string
+        prev:
+          type:
+          - string
+          - 'null'
+        next:
+          type:
+          - string
+          - 'null'
+        last:
+          type: string
     ErrorResponse:
       type: object
       properties:
@@ -148,50 +192,6 @@ components:
         errorCode:
           type: string
           description: Optional error code
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-  parameters:
-    PageParam:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number for pagination
-    IncludeParam:
-      name: include
-      in: query
-      required: false
-      schema:
-        type: string
-      description: Comma-delimited list of related resources to include in response (e.g., customers,payment_methods)
-    LimitParam:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 1
-        maximum: 500
-      description: Number of records per page (1-500)
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
   responses:
     NotFound:
       description: Resource not found

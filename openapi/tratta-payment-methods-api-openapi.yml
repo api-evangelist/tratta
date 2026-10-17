@@ -97,7 +97,44 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  parameters:
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 1
+      description: Page number for pagination
+    IdParam:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+      description: Resource unique identifier
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        default: 10
+        minimum: 1
+        maximum: 500
+      description: Number of records per page (1-500)
   schemas:
+    PaginationMeta:
+      type: object
+      properties:
+        total:
+          type: integer
+        current_page:
+          type: integer
+        per_page:
+          type: integer
+        total_pages:
+          type: integer
     PaymentMethodListResponse:
       type: object
       properties:
@@ -107,6 +144,27 @@ components:
             $ref: '#/components/schemas/PaymentMethod'
         meta:
           $ref: '#/components/schemas/PaginationMeta'
+    PaymentMethodResponse:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/PaymentMethod'
+    PaymentMethodRequest:
+      type: object
+      required:
+      - type
+      - token
+      properties:
+        type:
+          type: string
+          enum:
+          - card
+          - bank_account
+        token:
+          type: string
+          description: Tokenized payment data from payment processor
+        customer_id:
+          type: string
     PaymentMethod:
       type: object
       properties:
@@ -128,27 +186,6 @@ components:
         created_at:
           type: string
           format: date-time
-    PaymentMethodRequest:
-      type: object
-      required:
-      - type
-      - token
-      properties:
-        type:
-          type: string
-          enum:
-          - card
-          - bank_account
-        token:
-          type: string
-          description: Tokenized payment data from payment processor
-        customer_id:
-          type: string
-    PaymentMethodResponse:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/PaymentMethod'
     ErrorResponse:
       type: object
       properties:
@@ -158,43 +195,6 @@ components:
         errorCode:
           type: string
           description: Optional error code
-    PaginationMeta:
-      type: object
-      properties:
-        total:
-          type: integer
-        current_page:
-          type: integer
-        per_page:
-          type: integer
-        total_pages:
-          type: integer
-  parameters:
-    PageParam:
-      name: page
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 1
-      description: Page number for pagination
-    LimitParam:
-      name: limit
-      in: query
-      required: false
-      schema:
-        type: integer
-        default: 10
-        minimum: 1
-        maximum: 500
-      description: Number of records per page (1-500)
-    IdParam:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-      description: Resource unique identifier
   responses:
     NotFound:
       description: Resource not found
