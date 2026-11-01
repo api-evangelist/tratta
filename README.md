@@ -1,4 +1,4 @@
-# Tratta (tratta)
+# Tratta
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,66 +66,173 @@
 
 Tratta is a debt collection and payment experience platform that provides REST APIs and webhooks for integrating payment plans, billing, customer session management, and collections workflows into existing tech stacks. The platform supports OAuth 2.0 / bearer token authentication and offers sandbox and production environments.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/tratta/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/tratta/refs/heads/main/apis.yml)
+**Areas:** Billing · Collection · Payments · Debt Collection · Fintech
 
-## Scope
+## Tratta on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Tratta is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/tratta/](https://apis.io/providers/tratta/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (10)
 
-- Billing
-- Collections
-- Payments
-- Debt Collection
-- Fintech
+- [Tratta Bulk Operations API](https://apis.io/apis/tratta/tratta-bulk-operations-api/) — Bulk import and export operations
+- [Tratta Charges API](https://apis.io/apis/tratta/tratta-charges-api/) — Charge processing and management
+- [Tratta Customer Sessions API](https://apis.io/apis/tratta/tratta-customer-sessions-api/) — Secure customer session management
+- [Tratta Customers API](https://apis.io/apis/tratta/tratta-customers-api/) — Customer account management
+- [Tratta Debt Accounts API](https://apis.io/apis/tratta/tratta-debt-accounts-api/) — Debt account operations and management
+- [Tratta Payment Methods API](https://apis.io/apis/tratta/tratta-payment-methods-api/) — Payment method storage and management
+- [Tratta Payment Plans API](https://apis.io/apis/tratta/tratta-payment-plans-api/) — Payment plan creation and management
+- [Tratta Tickets API](https://apis.io/apis/tratta/tratta-tickets-api/) — Support ticket management
+- [Tratta Transactions API](https://apis.io/apis/tratta/tratta-transactions-api/) — Transaction history and reporting
+- [Tratta Webhooks API](https://apis.io/apis/tratta/tratta-webhooks-api/) — Webhook configuration for event notifications
 
-## Timestamps
+### Published properties
 
-- **Created:** 2025-02-24
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Tratta API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-REST API for Tratta's debt collection and payment platform. Enables programmatic management of debt accounts, payment plans, transactions, charges, customers, and webhooks for collections workflows.
+- [Tratta Agentic Access](https://apis.io/agentic-access/tratta/tratta-agentic-access/)
 
-- **Human URL:** [https://docs.tratta.io/](https://docs.tratta.io/)
-- **Base URL:** `https://api.tratta.io`
+#### JSON Schema (2)
 
-#### Tags
+The data models the API reads and writes.
 
-- Billing
-- Collections
-- Payments
-- Debt Collection
-- Fintech
+- [Tratta Debt Account](https://apis.io/schemas/tratta/tratta-debt-account/)
+- [Tratta Payment Plan](https://apis.io/schemas/tratta/tratta-payment-plan/)
 
-#### Properties
+#### JSON Structure (1)
 
-- [Documentation](https://docs.tratta.io/api.html)
-- [OpenAPI](openapi/tratta-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/tratta.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/tratta.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/tratta-payment-plan-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/tratta-debt-account-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Structure](json-structure/tratta-payment-plan-structure.json)
-- [JSON-LD](json-ld/tratta-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Spectral Rules](rules/tratta-rules.yml)
-- [Vocabulary](vocabulary/tratta-vocabulary.yml)
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Tratta Payment Plan Structure](https://apis.io/json-structure/tratta/tratta-payment-plan-structure/)
 
-- [GitHub Organization](https://github.com/tratta)
-- [LinkedIn](https://www.linkedin.com/company/tratta)
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Tratta Context](https://apis.io/jsonld/tratta/tratta-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Tratta Vocabulary](https://apis.io/vocabularies/tratta/tratta-vocabulary/)
+
+#### Examples (2)
+
+Example requests and responses.
+
+- [Tratta Create Customer Session Example](https://apis.io/examples/tratta/tratta-create-customer-session-example/)
+- [Tratta Create Payment Plan Example](https://apis.io/examples/tratta/tratta-create-payment-plan-example/)
+
+#### Collections (11)
+
+Postman and Open Collection request collections.
+
+- [Tratta API](https://apis.io/collections/tratta/open-tratta/)
+- [Tratta Bulk Operations API](https://apis.io/collections/tratta/open-tratta-bulk-operations-api/)
+- [Tratta Bulk Operations Charges API](https://apis.io/collections/tratta/open-tratta-charges-api/)
+- [Tratta Bulk Operations Customer Sessions API](https://apis.io/collections/tratta/open-tratta-customer-sessions-api/)
+- [Tratta Bulk Operations Customers API](https://apis.io/collections/tratta/open-tratta-customers-api/)
+- [Tratta Bulk Operations Debt Accounts API](https://apis.io/collections/tratta/open-tratta-debt-accounts-api/)
+- [Tratta Bulk Operations Payment Methods API](https://apis.io/collections/tratta/open-tratta-payment-methods-api/)
+- [Tratta Bulk Operations Payment Plans API](https://apis.io/collections/tratta/open-tratta-payment-plans-api/)
+- [Tratta Bulk Operations Tickets API](https://apis.io/collections/tratta/open-tratta-tickets-api/)
+- [Tratta Bulk Operations Transactions API](https://apis.io/collections/tratta/open-tratta-transactions-api/)
+- [Tratta Bulk Operations Webhooks API](https://apis.io/collections/tratta/open-tratta-webhooks-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Tratta — jsonschema rules](https://apis.io/rules/tratta/tratta-jsonschema-spectral-rules/)
+- [Tratta API Rules](https://apis.io/rules/tratta/tratta-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Tratta Authentication](https://apis.io/security/tratta/tratta-authentication/)
+- [Tratta Domain Security](https://apis.io/security/tratta/tratta-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Tratta Plans Pricing](https://apis.io/plans/tratta/tratta-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Tratta Rate Limits](https://apis.io/rate-limits/tratta/tratta-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Tratta Finops](https://apis.io/finops/tratta/tratta-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
 - [Website](https://www.tratta.io/)
 - [Documentation](https://docs.tratta.io/)
-- [Sign Up](https://www.tratta.io/)
+- [Blog](https://www.tratta.io/blog/rss.xml)
+- [GitHub](https://github.com/tratta)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 35.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 63.0 |
+| Contract governance | 27.3 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 23.8 |
+| Access clarity | 21.1 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 18.8** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/tratta/](https://apis.io/providers/tratta/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Tratta: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/tratta/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
